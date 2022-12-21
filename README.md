@@ -4,13 +4,13 @@ https://www.udemy.com/share/103dum3@Rp4r8gU57bNPeqPGxCtjAGOWBA5G0K0QYRRnwS6hY-Cy
 
 Tecnologías utilizadas:
 
-Vite
-React
-Javascript
-React Router Dom
-React Redux
-React Redux Toolkit
-Material UI
-Bootstrap 5 (en menor medida).
-Firebase Authentication
-Firebase Firestore
+* Vite.
+* React
+* Javascript.
+* React Router Dom.
+* React Redux.
+* React Redux Toolkit.
+* Material UI.
+* Bootstrap 5 (en menor medida).
+* Firebase Authentication.
+* Firebase Firestore.
