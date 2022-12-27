@@ -1,4 +1,4 @@
-import { Grid } from '@mui/material'
+import { Box, Grid } from '@mui/material'
 import { useUIStore, useMangaStore } from '../hooks';
 
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
@@ -30,8 +30,26 @@ export const NavBar = () => {
 				<Grid item onClick={ startLimpiarMangaActivo } className='pointer' >
 					{
 						( styleMode === 'dark' )
-						? ( <img src="https://res.cloudinary.com/dmuswnvaf/image/upload/v1670807848/MyManga/Logo/Logo_Peque%C3%B1o_yrfjbi.png" style={{ height: '100px' }} />						 )
-						: ( <img src="https://res.cloudinary.com/dmuswnvaf/image/upload/v1670807816/MyManga/Logo/White_Mode_Logo_Peque%C3%B1o_jwwxou.png" style={{ height: '100px' }} />						 )
+						? ( <Box>
+								<Box sx={{ display: { xs: 'block', sm: 'none' } }} >
+									<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1670807848/MyManga/Logo/Logo_Peque%C3%B1o_yrfjbi.png" /> 
+								</Box>
+								<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+									<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1670807848/MyManga/Logo/Logo_Peque%C3%B1o_yrfjbi.png" /> 
+								</Box>
+							</Box>
+						  )
+						
+						: ( 
+							<Box>
+								<Box sx={{ display: { xs: 'block', sm: 'none' } }}>
+									<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1670807816/MyManga/Logo/White_Mode_Logo_Peque%C3%B1o_jwwxou.png'/> 
+								</Box>
+								<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
+									<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1670807816/MyManga/Logo/White_Mode_Logo_Peque%C3%B1o_jwwxou.png'/> 
+								</Box>
+							</Box>
+						  )
 					}
 				</Grid>
 
