@@ -1,6 +1,4 @@
-import CircularProgress from '@mui/material/CircularProgress';
-import Box from '@mui/material/Box';
-import { Grid, Typography } from '@mui/material';
+import { Grid, Typography, CircularProgress } from '@mui/material';
 
 export const SimboloCargando = () => {
     return (

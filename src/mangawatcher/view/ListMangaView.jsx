@@ -1,15 +1,11 @@
-import { Grid, Typography } from '@mui/material'
-import { MangaTitleItem } from '../components/MangaTitleItem'
-import { useUIStore } from '../hooks';
+import { Grid } from '@mui/material'
+import { MangaTitleItem } from '../components'
 
 export const ListMangaView = () => {
 
-	const { styleMode } = useUIStore();
-
-
 	return (
 		<>
-			<Grid container spacing={ 0 } sx={{ minHeight: '100vh', backgroundColor: `${ styleMode }.secondary`, p: 2, pt:5 }} >
+			<Grid container spacing={ 0 } sx={{ minHeight: '100vh', p: 2, pt:5 }} >
 
 				<Grid container justifyContent="center" spacing={ 2 }>
 

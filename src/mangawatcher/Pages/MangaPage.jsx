@@ -2,8 +2,7 @@ import { Grid } from "@mui/material";
 
 import { useMangaStore } from "../hooks";
 import { MangaLayout } from "../layout/MangaLayout";
-import { ListMangaView } from "../view/ListMangaView";
-import { MangaView } from "../view/MangaView";
+import { ListMangaView, MangaView } from "../view";
 
 export const MangaPage = () => {
 	
@@ -12,7 +11,7 @@ export const MangaPage = () => {
 	return (
 		<>
 			<MangaLayout>
-				<Grid container>
+				<Grid container >
 					{
 						( activeManga )
 						? ( <MangaView /> )

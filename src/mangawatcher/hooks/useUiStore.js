@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux"
-import { onChangeStyle, onCloseModal, onDecrement, onIncrement, onOpenModal, onSetVisualizador } from "../../store/ui";
+import { onChangeStyle, onCloseModal, onDecrement, onIncrement, onOpenModal, onSetVisualizador } from "../../store/ui/uiSlice";
 
 export const useUIStore = () => {
 

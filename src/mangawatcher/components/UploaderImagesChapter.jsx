@@ -1,6 +1,5 @@
-import React from 'react'
-
-export const UploaderImagesChapter = ( { title,  } ) => {
+export const UploaderImagesChapter = ( ) => {
+	
 	return (
 
 		<>
@@ -31,13 +30,13 @@ export const UploaderImagesChapter = ( { title,  } ) => {
 
 			<Grid item xs={ 10 } >		
 				<Grid container spacing={ 2 }>							
-					{
+					{/* {
 						thanksTitlesList.map( thanksFile => (
 
 							<CardImagePreview key={ thanksFile.name } image={ thanksFile.image } title={ thanksFile.name } type={ 'A' } />
 
 						) )
-					}
+					} */}
 				</Grid>
 			</Grid>
 		</>

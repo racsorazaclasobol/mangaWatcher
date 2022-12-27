@@ -24,8 +24,16 @@ export const useForm = ( initialForm = {}, formValidations = {}) => {
      }, [formValidation]);
 
     const onInputChange = ({ target }) => {
-        console.log(target)
+
         const { name, value } = target;
+        setFormState({
+            ...formState,
+            [ name ]: value
+        });
+    }
+
+    const onInputCustomChange = ( { name, value } ) => {
+        
         setFormState({
             ...formState,
             [ name ]: value
@@ -55,6 +63,7 @@ export const useForm = ( initialForm = {}, formValidations = {}) => {
         formState,
         onInputChange,
         onResetForm,
+        onInputCustomChange,
 
         ...formValidation,
         isFormValid

@@ -2,31 +2,34 @@ import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 
 import { LoginPage } from "../auth/Pages";
-import { useMangaStore } from "../mangawatcher/hooks";
+import { SimboloCargando } from "../mangawatcher/components";
+import { useMangaStore, useAuthStrore } from "../mangawatcher/hooks";
 import { AdminPage, MangaPage } from "../mangawatcher/Pages";
 
 export const AppRouter = () => {
 
 	const { startObtenerTitulosMangas } = useMangaStore();
-
-	const authState = "authenticated"; //Todo store.auth
+	const { status, startCheckingAuth } = useAuthStrore();
 
 	useEffect(() => {
 		startObtenerTitulosMangas();
-	}, [])
+	}, []);
 
-	if( authState === "authenticated"){
+	useEffect( () => {
+		startCheckingAuth();
+	}, [] );
 
-		//dispatch( startNewChapter() );
-
+	if( status === 'checking' ){
+		return ( <SimboloCargando />)
 	}
 
-	return (
+	return (	
 		<>
+
 			<Routes>
 				
 				{
-					( authState === "authenticated" )
+					( status === "authenticated" )
 					? <Route path="/admin" element={ <AdminPage /> } /> //Ruta Privada
 					: <Route path="/admin" element={ <LoginPage /> } /> //Ruta Publica
 				}

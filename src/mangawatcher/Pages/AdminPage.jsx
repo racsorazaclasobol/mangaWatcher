@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from "react";
 
 import { useForm } from "../../hooks"
 import { MangaLayout } from "../layout/MangaLayout"
-
-import { Button, Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { useUIStore, useAdminStore, useAuthStrore } from "../hooks";
 import { CardImagePreview, SimboloCargando } from "../components";
 
+import { Button, Divider, FormControl, FormHelperText, Grid, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+
 import Swal from 'sweetalert2';
-import { useUIStore, useAdminStore } from "../hooks";
+import { LogoutOutlined } from "@mui/icons-material";
 
 const initialForm = {
 	manga: '',
@@ -31,10 +32,11 @@ export const AdminPage = () => {
 		} = useAdminStore();
 
 	const { styleMode } = useUIStore();
+	const { startLogout } = useAuthStrore();
 	
 	const { 
 			formState, manga, capitulo, titulo, isFormValid, mangaValid, capituloValid, tituloValid, 
-			onInputChange, onResetForm 
+			onInputChange, onResetForm, onInputCustomChange 
 
 		} = useForm(initialForm, formValidation);
 	
@@ -134,6 +136,10 @@ export const AdminPage = () => {
 
 	}
 
+	const onLogout = () => {
+		startLogout();
+	}
+
 	useEffect(() => {
 		startStoreNuevoCapitulo( formState );
 	}, [formState])
@@ -144,12 +150,6 @@ export const AdminPage = () => {
 			onClearForm();
 		}
 	},[ message ] )
-
-	useEffect(() => {
-	  	if( manga ){
-			startObtenerUltimoCap(manga);
-		}
-	}, [ manga ])
 	
 	useEffect( () => {
 		if( infoManga ){
@@ -159,6 +159,31 @@ export const AdminPage = () => {
 			
 		}
 	}, [ infoManga ] )
+
+	useEffect(() => {
+		if( manga ) {
+
+			startObtenerUltimoCap(manga);
+
+	  	}
+  	}, [ manga ])
+
+	useEffect(() => {
+
+		if( !ultimoCapitulo ) return;
+
+		let siguienteCapitulo = parseInt( ultimoCapitulo );
+
+		const target = {
+			value: siguienteCapitulo += 1, 
+			name: 'capitulo'
+		}
+		
+		onInputCustomChange( target );
+
+
+	}, [ultimoCapitulo])
+	
 
 	return (
 		<>
@@ -174,13 +199,22 @@ export const AdminPage = () => {
 
 					<Grid container direction='row' justifyContent='center' sx={{ backgroundColor: `${ styleMode }.dark` }} minHeight='100vh' >
 						
-						<Grid item xs={10} sx={{ backgroundColor: `${ styleMode }.white` }} p={5} >
+						<Grid item xs={10} sx={{ backgroundColor: `${ styleMode }.gray.claro` }} p={5} >
 							<Grid container>
 								
-								<Grid item xs={ 12 } mb={ 5 }>
+								<Grid item xs={ 11 }  >
 									<Typography variant="h4">
 										Subir Capitulos
 									</Typography>
+								</Grid>
+
+								<Grid item xs={ 1 }  >
+									<IconButton color="error" onClick={ onLogout } >
+										<LogoutOutlined sx={{ fontSize:'30px' }}/> 
+									</IconButton>
+								</Grid>
+
+								<Grid item xs={ 12 } mb={ 5 }>
 									<Divider />
 								</Grid>
 
@@ -446,3 +480,6 @@ export const AdminPage = () => {
 		</>
 	)
 }
+
+
+

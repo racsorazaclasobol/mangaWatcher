@@ -1,5 +1,5 @@
 import { Grid, Button, Card, CardContent, CardMedia, Typography } from "@mui/material";
-import { useMangaStore } from "../hooks/useMangaStore";
+import { useMangaStore } from "../hooks";
 
 export const MangaTitleItem = () => {
 

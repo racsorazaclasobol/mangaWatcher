@@ -18,7 +18,7 @@ export const MangaView = () => {
 
 	return (
 		<>
-            <Grid  container sx={{ backgroundColor: `${ styleMode }.secondary` }}>
+            <Grid container >
 
 				{
 					( localVisualizador == 0 )

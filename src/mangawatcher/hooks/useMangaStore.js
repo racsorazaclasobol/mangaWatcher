@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { collection, getDocs } from "firebase/firestore/lite";
 
 import { FirebaseDB } from "../../firebase/config";
-import { clearActiveManga, onLoading, onLoadMangas, setActiveManga } from "../../store/mymanga";
-import { onCloseModal, onResetCounter } from "../../store/ui";
+import { clearActiveManga, onLoading, onLoadMangas, setActiveManga } from "../../store/mymanga/mangaSlice";
+import { onCloseModal, onResetCounter } from "../../store/ui/uiSlice";
 
 export const useMangaStore = () => {
 

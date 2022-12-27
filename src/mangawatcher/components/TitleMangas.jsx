@@ -1,4 +1,4 @@
-import { Divider, Grid, Typography } from "@mui/material";
+import { Grid, Typography } from "@mui/material";
 import { orange } from "@mui/material/colors";
 import { useEffect, useState } from "react";
 import { useMangaStore, useUIStore } from "../hooks";
@@ -41,7 +41,6 @@ export const TitleMangas = () => {
                 <Typography variant='h6' mt={ 1 } sx={{ color: `colors.gray.suave` }} >
                     { `${ tituloManga } ${ capitulo } Español - ${ tituloCap } `} <br /> {` ${ titulo }` }				
 				</Typography>
-
             </Grid>
 
         </Grid>

@@ -12,7 +12,7 @@ export const ScrollVisualizador = () => {
 
             <TitleMangas />
 
-                <Grid container justifyContent="center" className="animate__animated animate__fadeIn" sx={{ maxHeight: '100vh', overflow: 'scroll', overflowX:'hidden'  }} >
+                <Grid container justifyContent="center" className="animate__animated animate__fadeIn" sx={{ maxHeight: 'calc(100vh - 130px)', overflow: 'scroll', overflowX:'hidden'  }} >
 
                     <Grid item lg={ 8 } sm={ 10 } xs={ 12 } >
                         {
