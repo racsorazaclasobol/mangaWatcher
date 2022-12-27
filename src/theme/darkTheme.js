@@ -8,6 +8,7 @@ export const darkTheme = createTheme({
             primary:'#1CA3AA',
             secondary: '#EDEDED',
             normalText: '#000000',
+            divider: grey[500],
             white: '#EDEDED',
             gray: { claro: grey[100], suave: grey[300], medio: grey[500], oscuro: grey[700],},
             dark: '#282828'
@@ -17,6 +18,7 @@ export const darkTheme = createTheme({
             primary: '#372E48',
             secondary: '#282828',
             normalText: '#FFFFFF',
+            divider: grey[300],
             gray: { claro: grey[100], suave: grey[300], medio: grey[500], oscuro: grey[700],},
             dark: '#282828'
         },

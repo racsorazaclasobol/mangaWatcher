@@ -1,4 +1,4 @@
-import { Grid, Button, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Grid, Button, Card, CardContent, CardMedia, Typography, Box, CardHeader, CardActions } from "@mui/material";
 import { useMangaStore } from "../hooks";
 
 export const MangaTitleItem = () => {
@@ -10,33 +10,29 @@ export const MangaTitleItem = () => {
         startObtenerUltimoCap( mangaId, titulo );
     }
 
-  return (
-    <>
-
-        {
-            mangas.map( manga => (
-                <Grid key={manga.id} item className="animate__animated animate__fadeIn">
-                    <Button onClick={ () => onOpenManga( manga.id, manga.titulo ) }>
-                        <Card sx={{ width: 300, maxHeight: 400,  }} >
+    return (
+        <>
+            {
+                mangas.map( manga => (
+                    <Grid key={ manga.id } onClick={ () => onOpenManga( manga.id, manga.titulo ) } className="box-shadow pointer" m={2} maxHeight="360px" >
+                        <Card sx={{ maxHeight: '380px', width: 300 }}>
                             <CardMedia
-                                component="img"
-                                height="350"
+                                sx={{ height: '300px' }}
                                 image={ manga.portada }
-                                alt="green iguana"
+                                title="green iguana"
                             />
                             <CardContent>
-                                <Typography gutterBottom variant="h6" >
+                                <Typography variant="h6" >
                                     { manga.titulo }
+                                </Typography>
+                                <Typography variant="subtitle2" sx={{ textAlign: 'right' }}>
+                                    ~ { manga.autor }
                                 </Typography>
                             </CardContent>
                         </Card>
-                    </Button>
-                </Grid>
-                
-            ))
-        }
-
-        
-    </>
-  );
+                    </Grid>
+                ))
+            }
+        </>
+    );
 };

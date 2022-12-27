@@ -7,7 +7,7 @@ export const uiSlice = createSlice({
 		counter: 0,
 		isOpenModal: false,
 		visualizador: null,
-		styleMode: 'dark'
+		styleMode: 'white'
 	},
 	reducers: {
 		/* COUNTER */

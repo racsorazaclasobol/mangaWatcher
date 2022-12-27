@@ -5,13 +5,9 @@ export const ListMangaView = () => {
 
 	return (
 		<>
-			<Grid container spacing={ 0 } sx={{ minHeight: '100vh', p: 2, pt:5 }} >
+			<Grid container spacing={ 0 } justifyContent="center" sx={{ minHeight: 'calc(100vh - 230px )', p: 2, pt:5 }} >
 
-				<Grid container justifyContent="center" spacing={ 2 }>
-
-					<MangaTitleItem />
-
-				</Grid>
+				<MangaTitleItem />
 
 			</Grid>
 		</>

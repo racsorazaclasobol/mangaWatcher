@@ -23,6 +23,8 @@ export const AppRouter = () => {
 		return ( <SimboloCargando />)
 	}
 
+	console.log(status)
+
 	return (	
 		<>
 
