@@ -1,12 +1,17 @@
 import { useEffect } from 'react';
 
-import { useUIStore } from '../hooks';
+import { useMangaStore, useUIStore } from '../hooks';
 import { ButtomVisualizador, ModalSelectorVis, ScrollVisualizador } from '../components';
 import { Grid } from '@mui/material';
 
 export const MangaView = () => {
 
-	const { localVisualizador, openModal } = useUIStore();	
+	const { localVisualizador, openModal } = useUIStore();
+	const { startLimpiarMangaActivo } = useMangaStore();
+	
+	window.onpopstate = () => {
+		startLimpiarMangaActivo();
+	}
 
 	useEffect( () => {
 		if( localVisualizador == null ){

@@ -195,9 +195,9 @@ export const AdminPage = () => {
 					: (<></>)
 				}
 
-				<Grid container minHeight='100vh' direction='column' >	
+				<Grid container minHeight='100vh' direction='column'  >	
 
-					<Grid container direction='row' justifyContent='center' sx={{ backgroundColor: `${ styleMode }.dark` }} minHeight='100vh' >
+					<Grid container direction='row' justifyContent='center' sx={{ backgroundColor: `${ styleMode }.dark` }} minHeight='100vh' pb={ 5 } >
 						
 						<Grid item xs={10} sx={{ backgroundColor: `${ styleMode }.gray.claro` }} p={5} >
 							<Grid container>

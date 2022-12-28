@@ -4,7 +4,7 @@ import { grey } from "@mui/material/colors"
 export const Footer = () => {
 	return (
 		<>
-			<Grid container mt={5} justifyContent='center' height={100} sx={{ backgroundColor:'black' }} >
+			<Grid container mt={ 0 } justifyContent='center' height={100} sx={{ backgroundColor:'black' }} >
 				<Grid item xs={ 12 } sm={ 10 }  alignItems='center' alignContent='center' container >
 
 					<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_150/v1671651562/MyManga/Logo/Logo_ByN_zyzvr6.png" height="60" />

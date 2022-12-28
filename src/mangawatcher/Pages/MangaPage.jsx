@@ -33,7 +33,7 @@ export const MangaPage = () => {
 					: (<></>)
 				}
 
-				<Grid container >
+				<Grid container pb={ 5 }>
 					{
 						( activeManga )
 						? ( <MangaView /> )

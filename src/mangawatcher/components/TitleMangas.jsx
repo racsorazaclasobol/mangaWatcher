@@ -10,7 +10,7 @@ export const TitleMangas = () => {
 
 
     return (
-        <Grid container justifyContent='center' pb={ 5 } className="animate__animated animate__fadeIn">
+        <Grid container justifyContent='center' pb={ 2 } className="animate__animated animate__fadeIn">
 
             <Grid item lg={ 8 } sm={ 10 } xs={ 12 } minHeight='50px' className="box-shadow" sx={{ borderTop: '1px solid', borderColor: `${ styleMode }.secondary` , borderBottomLeftRadius:'10px', borderBottomRightRadius:'10px' }} bgcolor={ `${ styleMode }.primary` } alignItems='center' textAlign='center' >
                 
