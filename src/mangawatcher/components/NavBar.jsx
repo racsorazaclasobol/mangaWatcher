@@ -5,11 +5,13 @@ import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import NightlightOutlinedIcon from '@mui/icons-material/NightlightOutlined';
 import SwipeIcon from '@mui/icons-material/Swipe';
 import SwipeVerticalIcon from '@mui/icons-material/SwipeVertical';
+import { useNavigate } from 'react-router-dom';
 
 export const NavBar = () => {
 
 	const { styleMode, localVisualizador, visualizador, changeStyleMode, setVisualizadorManga, closeModal } = useUIStore();
 	const { activeManga, startLimpiarMangaActivo } = useMangaStore();
+	const navigate = useNavigate();
 
 	const onChangeStyleMode = () => {
 		
@@ -20,45 +22,44 @@ export const NavBar = () => {
 	const onSetVisualizador = ( opcion ) => {
         setVisualizadorManga( opcion );
         closeModal();
-    }	
+    }
+
+	const onBackHomePage = () => {
+		startLimpiarMangaActivo();
+
+		navigate('/home');
+	}
 
   return (
 
 		<Grid container justifyContent='center' height={130} sx={{ backgroundColor:`${ styleMode }.primary` }} className='box-shadow' >
 			<Grid item xs={ 12 } sm={ 10 } justifyContent='space-between' alignItems='center' container >
 
-				<Grid item onClick={ startLimpiarMangaActivo } className='pointer' >
+				<Grid item onClick={ onBackHomePage } className='pointer' >
 					{
 						( styleMode === 'dark' )
 						? ( <Box>
-								<Box sx={{ display: { xs: 'block', sm: 'none' } }} >
-									<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1670807848/MyManga/Logo/Logo_Peque%C3%B1o_yrfjbi.png" /> 
-								</Box>
-								<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-									<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1670807848/MyManga/Logo/Logo_Peque%C3%B1o_yrfjbi.png" /> 
-								</Box>
+								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1670807848/MyManga/Logo/Logo_Peque%C3%B1o_yrfjbi.png" className='d-block d-sm-none'/> 
+								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1670807848/MyManga/Logo/Logo_Peque%C3%B1o_yrfjbi.png" className='d-none d-sm-block'/> 
+								
 							</Box>
 						  )
 						
 						: ( 
-							<Box>
-								<Box sx={{ display: { xs: 'block', sm: 'none' } }}>
-									<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1670807816/MyManga/Logo/White_Mode_Logo_Peque%C3%B1o_jwwxou.png'/> 
-								</Box>
-								<Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-									<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1670807816/MyManga/Logo/White_Mode_Logo_Peque%C3%B1o_jwwxou.png'/> 
-								</Box>
+							<Box >
+								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1670807816/MyManga/Logo/White_Mode_Logo_Peque%C3%B1o_jwwxou.png' className='d-block d-sm-none'/> 
+								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1670807816/MyManga/Logo/White_Mode_Logo_Peque%C3%B1o_jwwxou.png' className='d-none d-sm-block'/> 
 							</Box>
 						  )
 					}
 				</Grid>
 
-				<Grid item pt={ 2 } >
+				<Grid item pt={ 2 } pr={ 2 }>
 
 					{
 						( styleMode === 'dark' )
-						? ( <NightlightOutlinedIcon sx={{ fontSize: '33px' }} className='botonesNavbar' onClick={ onChangeStyleMode } /> )
-						: ( <LightModeOutlinedIcon sx={{ fontSize: '33px' }} className='botonesNavbar' onClick={ onChangeStyleMode } /> )
+						? ( <NightlightOutlinedIcon sx={{ fontSize: '33px', }} className='botonesNavbar' onClick={ onChangeStyleMode } /> )
+						: ( <LightModeOutlinedIcon sx={{ fontSize: '33px',  }} className='botonesNavbar' onClick={ onChangeStyleMode } /> )
 					} 
 
 					{

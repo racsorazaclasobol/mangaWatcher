@@ -18,9 +18,6 @@ export const useAuthStrore = () => {
         dispatch( onChecking() );
 
         try {
-
-            console.log(loginEmail, loginPassword);
-
             const { user } = await signInWithEmailAndPassword( FirebaseAuth, loginEmail, loginPassword );
             const { accessToken, displayName, email, uid } = user;
 

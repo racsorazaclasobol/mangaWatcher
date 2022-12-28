@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
 import { useMangaStore } from "../hooks";   
-import { ButtonScrollUp, ImageMangaPages, TitleMangas } from "./";
+import { ImageMangaPages, TitleMangas } from "./";
 
 export const ScrollVisualizador = () => {
 
@@ -12,7 +12,7 @@ export const ScrollVisualizador = () => {
 
             <TitleMangas />
 
-                <Grid container justifyContent="center" className="animate__animated animate__fadeIn" sx={{ maxHeight: 'calc(100vh - 100px)', overflow: 'scroll', overflowX:'hidden'  }} >
+                <Grid container justifyContent="center" className="animate__animated animate__fadeIn" sx={{ maxHeight: 'calc(100vh - 80px)', overflow: 'scroll', overflowX:'hidden'  }} >
 
                     <Grid item lg={ 8 } sm={ 10 } xs={ 12 }  >
                         {
@@ -21,7 +21,6 @@ export const ScrollVisualizador = () => {
                                     <ImageMangaPages key={ pagina.url } pagina={ pagina } />
                                 ) 
                             )
-
                         }
                     </Grid>
                     

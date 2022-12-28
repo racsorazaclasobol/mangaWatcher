@@ -25,8 +25,6 @@ export const useAdminStore = () => {
             const paginaSinExtencion = currentValue.name.replace('.webp', '');
             const pagina = paginaSinExtencion.replace(tipo, '');
 
-            console.log({ tipo, pagina })
-
             return {
                 pagina: pagina,
                 tipo: tipo,
@@ -45,8 +43,6 @@ export const useAdminStore = () => {
             
             const chapterToFirestore = { ...newChapter };
             chapterToFirestore.paginas = paginas;
-
-            console.log('NewChapter: ', newChapter)
 
             const docRef = doc( FirebaseDB, `mangas/${ newChapter.manga }/capitulos/${ newChapter.capitulo }` );
             await setDoc( docRef, chapterToFirestore, { merge: true } );

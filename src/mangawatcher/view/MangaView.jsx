@@ -6,8 +6,7 @@ import { Grid } from '@mui/material';
 
 export const MangaView = () => {
 
-	const { localVisualizador,visualizador, styleMode, openModal } = useUIStore();
-	
+	const { localVisualizador, openModal } = useUIStore();	
 
 	useEffect( () => {
 		if( localVisualizador == null ){

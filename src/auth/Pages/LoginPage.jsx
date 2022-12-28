@@ -1,7 +1,6 @@
-import { Button, Divider, FormControl, Grid, TextField, Typography } from "@mui/material"
 import { useState } from "react";
+import { Button, Divider, Grid, TextField, Typography } from "@mui/material"
 import { useForm } from "../../hooks";
-import { SimboloCargando } from "../../mangawatcher/components";
 import { useAuthStrore, useUIStore } from "../../mangawatcher/hooks"
 import { MangaLayout } from "../../mangawatcher/layout/MangaLayout"
 
@@ -27,7 +26,6 @@ export const LoginPage = () => {
         e.preventDefault();
         setFormSubmitted( true );
 
-        console.log( formState )
         startLoginWithEmailPassword( formState );
 
     }

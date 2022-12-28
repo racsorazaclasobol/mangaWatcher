@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { collection, getDocs } from "firebase/firestore/lite";
+import { collection, doc, getDoc, getDocs } from "firebase/firestore/lite";
 
 import { FirebaseDB } from "../../firebase/config";
 import { clearActiveManga, onLoading, onLoadMangas, setActiveManga } from "../../store/mymanga/mangaSlice";
@@ -33,16 +33,48 @@ export const useMangaStore = () => {
 
     }
 
-    const startObtenerUltimoCap = async ( mangaId, titulo ) => {
+    const startObtenerUltimoCap = async ( mangaId ) => {
 
         dispatch( onLoading() );
 
         const mangaChapters = [];
         const chaptersNumber = [];
 
+        const docRef = doc( FirebaseDB, `mangas/${ mangaId }` );
+        const mangaInfo = await getDoc( docRef );
+
+        const { titulo } = mangaInfo.data();
+        
         const collRef = collection( FirebaseDB, `mangas/${ mangaId }/capitulos` );
         const mangaDoc = await getDocs( collRef );
+                
+        mangaDoc.forEach( chapter => {
+            mangaChapters.push( { id: chapter.id, tituloManga: titulo, ...chapter.data() } );
+            chaptersNumber.push( chapter.id );
+        } )
+        
+        const lastChapter = Math.max( ...chaptersNumber );
+        const chapter = mangaChapters.filter( chapter => chapter.id === lastChapter.toString() );
 
+        dispatch( setActiveManga( chapter[0] ) );
+
+    }
+
+    const startObtenerPorCapitulo = async ( mangaId ) => {
+
+        dispatch( onLoading() );
+
+        const mangaChapters = [];
+        const chaptersNumber = [];
+
+        const docRef = doc( FirebaseDB, `mangas/${ mangaId }` );
+        const mangaInfo = await getDoc( docRef );
+
+        const { titulo } = mangaInfo.data();
+        
+        const collRef = collection( FirebaseDB, `mangas/${ mangaId }/capitulos` );
+        const mangaDoc = await getDocs( collRef );
+                
         mangaDoc.forEach( chapter => {
             mangaChapters.push( { id: chapter.id, tituloManga: titulo, ...chapter.data() } );
             chaptersNumber.push( chapter.id );
@@ -70,7 +102,8 @@ export const useMangaStore = () => {
         //* Funciones y Metodos
         startObtenerTitulosMangas,
         startObtenerUltimoCap,
-        startLimpiarMangaActivo
+        startLimpiarMangaActivo,
+        startObtenerPorCapitulo,
     }
 
 }

@@ -1,9 +1,7 @@
 import { useEffect } from "react";
-
 import { useMangaStore, useUIStore } from "../hooks";
-
 import { Grid } from "@mui/material";
-import { ButtonInvisible, TitleMangas } from "./";
+import { ButtonInvisible, TitleMangas, InfoCapitulo } from "./";
 
 export const ButtomVisualizador = () => {
 
@@ -61,6 +59,8 @@ export const ButtomVisualizador = () => {
 
 					
                     <Grid item lg={ 8 } sm={ 10 } xs={ 12 } textAlign='center' className="animate__animated animate__fadeIn" >
+
+						<InfoCapitulo pagina={ paginas[counter] }/>
 
                         <img src={ pag } style={{ maxWidth:'100%' }} className="animate__animated animate__fadeIn" /> 
 
