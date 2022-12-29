@@ -69,6 +69,17 @@
     padding: 10px;
 }
 
+.modal-chapter {
+    background: white;
+    border-radius: 7px;
+    color: rgb(51, 51, 51);
+    display: inline;
+    max-height: 300px;
+    max-width: 600px;
+    outline: none;
+    padding: 10px;
+}
+
 .vis-option:hover {
     background: #F7F7F7;
     border-radius: 10px;

@@ -5,13 +5,11 @@ import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import NightlightOutlinedIcon from '@mui/icons-material/NightlightOutlined';
 import SwipeIcon from '@mui/icons-material/Swipe';
 import SwipeVerticalIcon from '@mui/icons-material/SwipeVertical';
-import { useNavigate } from 'react-router-dom';
 
 export const NavBar = () => {
 
-	const { styleMode, localVisualizador, visualizador, changeStyleMode, setVisualizadorManga, closeModal } = useUIStore();
+	const { styleMode, localVisualizador, visualizador, changeStyleMode, setVisualizadorManga, closeModal, navigate } = useUIStore();
 	const { activeManga, startLimpiarMangaActivo } = useMangaStore();
-	const navigate = useNavigate();
 
 	const onChangeStyleMode = () => {
 		

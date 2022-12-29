@@ -6,6 +6,7 @@ export const uiSlice = createSlice({
 	{ 
 		counter: 0,
 		isOpenModal: false,
+		isOpenChapterModal: false,
 		visualizador: null,
 		styleMode: 'white'
 	},
@@ -30,6 +31,12 @@ export const uiSlice = createSlice({
 		},
 		onCloseModal: ( state ) => {
 			state.isOpenModal = false;
+		},
+		onOpenChapterModal: ( state ) => {
+			state.isOpenChapterModal = true;
+		},
+		onCloseChapterModal: ( state ) => {
+			state.isOpenChapterModal = false;
 		},
 		onSetVisualizador: ( state, { payload } ) => {
 			state.visualizador = payload;
@@ -57,6 +64,8 @@ export const {
 				onOpenModal,
 				onCloseModal,
 				onSetVisualizador,
+				onOpenChapterModal,
+				onCloseChapterModal,
 
 				/* ESTILO */
 				onChangeStyle,

@@ -1,11 +1,13 @@
 import { useDispatch, useSelector } from "react-redux"
-import { onChangeStyle, onCloseModal, onDecrement, onIncrement, onOpenModal, onSetVisualizador } from "../../store/ui/uiSlice";
+import { useNavigate } from "react-router-dom";
+import { onChangeStyle, onCloseChapterModal, onCloseModal, onDecrement, onIncrement, onOpenChapterModal, onOpenModal, onResetCounter, onSetVisualizador } from "../../store/ui/uiSlice";
 
 export const useUIStore = () => {
 
     const dispatch = useDispatch();
-    const { counter, isOpenModal, visualizador, styleMode } = useSelector( state => state.ui );
+    const { counter, isOpenModal, isOpenChapterModal, visualizador, styleMode } = useSelector( state => state.ui );
     const localVisualizador = localStorage.getItem('visualizador');
+    const navigate = useNavigate();
 
     const scrollTop = () => {
         window.scrollTo({top: 0, left: 0, behavior: 'smooth'});
@@ -21,12 +23,26 @@ export const useUIStore = () => {
         dispatch( onDecrement() );
     }
 
+    const resetCounter = () => {
+
+        dispatch( onResetCounter() );
+
+    }
+
     const openModal = () => {
         dispatch( onOpenModal() );
     }
 
     const closeModal = () => {
         dispatch( onCloseModal() );
+    }
+
+    const openChapterModal = () => {
+        dispatch( onOpenChapterModal() );
+    }
+
+    const closeChapterModal = () => {
+        dispatch( onCloseChapterModal() );
     }
 
     const setVisualizadorManga = ( opcion ) => {
@@ -46,6 +62,7 @@ export const useUIStore = () => {
         //* Propiedades y Objetos
         counter,
         isOpenModal,
+        isOpenChapterModal,
         visualizador,
         localVisualizador,
         styleMode,
@@ -56,8 +73,12 @@ export const useUIStore = () => {
         scrollTop,
         openModal,
         closeModal,
+        openChapterModal,
+        closeChapterModal,
         setVisualizadorManga,
         changeStyleMode,
+        navigate,
+        resetCounter,
 
     }
 

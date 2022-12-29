@@ -1,15 +1,15 @@
 import { Grid, Card, CardContent, CardMedia, Typography } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useMangaStore } from "../hooks";
+import { useMangaStore, useUIStore } from "../hooks";
 
 export const MangaTitleItem = () => {
 
     const { mangas, startObtenerUltimoCap } = useMangaStore();
-    const navigate = useNavigate();
+    const { navigate } = useUIStore();
     
-    const onOpenManga = ( mangaId ) => {
+    const onOpenManga = ( mangaId, tituloManga ) => {
         
-        startObtenerUltimoCap( mangaId );
+        startObtenerUltimoCap( mangaId, tituloManga );
+
         
         navigate( `/manga/${ mangaId }`)
         
@@ -19,7 +19,7 @@ export const MangaTitleItem = () => {
         <>
             {
                 mangas.map( manga => (
-                    <Grid key={ manga.id } onClick={ () => onOpenManga( manga.id ) } className="box-shadow pointer .d-none" m={2} maxHeight="360px" >
+                    <Grid key={ manga.id } onClick={ () => onOpenManga( manga.id, manga.titulo ) } className="box-shadow pointer .d-none" m={2} maxHeight="360px" >
                         <Card sx={{ maxHeight: '380px', width: 300 }}>
 
                             <CardMedia

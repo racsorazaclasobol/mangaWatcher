@@ -6,7 +6,8 @@ export const mangaSlice = createSlice({
         isLoading: false,
         messageOpen: '',
         mangas: [],
-        activeManga: null
+        activeManga: null,
+        listaCaps: [],
     },
    reducers: {
 
@@ -19,12 +20,28 @@ export const mangaSlice = createSlice({
         },
         setActiveManga: ( state, { payload } ) => {
             state.activeManga = payload ;
-            state.isLoading = false;
+        },
+        onSetTitleActiveManga: ( state, { payload } ) => { 
+            state.activeManga = { ...state.activeManga, tituloManga: payload }
         },
         clearActiveManga: (state) => {
             state.activeManga = null;
+            state.isLoading = false;
+        },
+        onSetListaCaps: ( state, { payload } ) => {
+            state.activeManga = { ...state.activeManga, listaCaps: payload }
+            state.isLoading = false;
         }
     },
 })
 
-export const { onLoading, onLoadMangas, setActiveManga, clearActiveManga } = mangaSlice.actions
+export const { 
+                onLoading, 
+                onLoadMangas, 
+                setActiveManga, 
+                clearActiveManga, 
+                onSetListaCaps,
+                onSetTitleActiveManga,
+            
+            
+            } = mangaSlice.actions
