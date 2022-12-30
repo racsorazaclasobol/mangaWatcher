@@ -1,9 +1,22 @@
 import { Grid } from "@mui/material"
+import { useEffect } from "react";
 import { useUIStore } from "../hooks"
 
 export const ButtonInvisible = ( {lastPage} ) => {
 
-    const { counter, incrementCounter, decrementCounter } = useUIStore();
+    const { counter, incrementCounter, decrementCounter, scrollTop } = useUIStore();
+
+    document.onkeydown = function( { key } ) {
+      switch (key) {
+        case 'ArrowLeft':
+          onPrevPage();
+          break;
+  
+        case 'ArrowRight':
+          onNextPage();
+          break;
+      }
+    };
 
     const onPrevPage = () => {
 		if( counter <= 0 ) return;
@@ -17,10 +30,14 @@ export const ButtonInvisible = ( {lastPage} ) => {
 		incrementCounter();
 	}
 
-  return (
-    <Grid container  direction='row' sx={{position: 'absolute', width:'100%', height:'100%' }}>
-        <Grid item xs={ 6 } onClick={ onPrevPage } > </Grid>
-        <Grid item xs={ 6 } onClick={ onNextPage } > </Grid>
-    </Grid>
-  )
+  useEffect(() => {
+	    scrollTop();
+	}, [counter]);
+
+	return (
+		<Grid container  direction='row' sx={{position: 'absolute', width:'100%', height:'100%' }}>
+			<Grid item xs={ 6 } onClick={ onPrevPage } > </Grid>
+			<Grid item xs={ 6 } onClick={ onNextPage } > </Grid>
+		</Grid>
+	)
 }

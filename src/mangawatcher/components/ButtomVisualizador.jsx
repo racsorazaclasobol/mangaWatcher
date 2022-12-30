@@ -6,49 +6,11 @@ import { ButtonInvisible, TitleMangas, InfoCapitulo } from "./";
 export const ButtomVisualizador = () => {
 
     const { activeManga } = useMangaStore();
-	const { counter, incrementCounter, decrementCounter, scrollTop } = useUIStore();
+	const { counter } = useUIStore();
 
 	const { paginas } = activeManga;
 	const lastPage = paginas.length - 1;
-	const pag = paginas[counter].url;
-
-	const onPrevPage = () => {
-		if( counter <= 0 ) return;
-
-		decrementCounter();
-	}
-
-	const onNextPage = () => {
-		if( counter === lastPage ) return;
-
-		incrementCounter();
-	}
-
-	document.onkeydown = function( { key } ) {
-		switch (key) {
-			case 'ArrowLeft':
-				onPrevPage();
-				break;
-
-			case 'ArrowRight':
-				onNextPage();
-				break;
-		
-			default:
-				break;
-		}
-	};
-
-	/* USE EFFECTS */
-
-	
-	useEffect(() => {
-	  scrollTop();
-	}, [pag]);
-
-	useEffect( () => {
-		
-	}, [] )
+	const pag = paginas[counter].url;	
 	
     return (
 		<>
