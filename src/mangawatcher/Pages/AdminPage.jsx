@@ -31,8 +31,10 @@ export const AdminPage = () => {
 			startSubirImagenes, startStoreNuevoCapitulo, startClearStore, startObtenerUltimoCap 
 		} = useAdminStore();
 
+		
 	const { styleMode } = useUIStore();
-	const { startLogout } = useAuthStrore();
+	const { startLogout, user } = useAuthStrore();
+	console.log({user})
 	
 	const { 
 			formState, manga, capitulo, titulo, isFormValid, mangaValid, capituloValid, tituloValid, 
@@ -49,6 +51,7 @@ export const AdminPage = () => {
 
 	const [formSubmitted, setFormSubmitted] = useState(false);
 	const [validacionImagenes, setValidacionImagenes] = useState(null);
+	
 	
 	const thanksInputRef = useRef();
 	const coversInputRef = useRef();
@@ -133,6 +136,12 @@ export const AdminPage = () => {
 
 
 		startSubirImagenes( allImages );
+
+	}
+
+	const alertDemoMessage = () => {
+
+		alert('Cuenta Demo - No se permite guardar');
 
 	}
 
@@ -465,7 +474,13 @@ export const AdminPage = () => {
 									<Divider />
 								</Grid>
 
-									<Button variant="contained" onClick={ onSaveManga }> Guardar </Button>
+									{
+										( user.uid === '1lnvyT41idVffnkoQqlW0NivKj33' )
+										? ( <Button variant="contained" onClick={ alertDemoMessage }> Guardar </Button> )
+										: ( <Button variant="contained" onClick={ onSaveManga }> Guardar </Button> )
+									}
+
+									
 
 									<Button variant="contained" color="error" onClick={ onClearForm }> Cancelar </Button>
 												

@@ -14,3 +14,14 @@ Tecnologías utilizadas:
 * Bootstrap 5 (en menor medida).
 * Firebase Authentication.
 * Firebase Firestore.
+
+```
+Credenciales Cuenta Demo
+--------------------------------------------------------
+
+Admin page: https://otakuplanet.cl/mymanga/#/admin
+
+Correo: demo@gmail.com
+Password: 123456789
+
+```

@@ -10,7 +10,7 @@ const errorLoginMessages = ['auth/wrong-password', 'auth/user-not-found'];
 export const useAuthStrore = () => {
     
     const dispatch = useDispatch();
-    const { status } = useSelector( state => state.auth );
+    const { status, user } = useSelector( state => state.auth );
 
 
     const startLoginWithEmailPassword = async({ loginEmail = '', loginPassword = '' }) => {
@@ -78,6 +78,7 @@ export const useAuthStrore = () => {
     return {
         //Objetos y Propiedades
         status,
+        user,
 
         //Funciones y Metodos
         startLoginWithEmailPassword,
