@@ -314,6 +314,7 @@ export const AdminPage = () => {
 								<Grid item xs={ 3 } ml={ 3 } mt={ 5 } >
 									<input
 										type="file"
+										accept="image/*" 
 										multiple
 										ref={ thanksInputRef }
 										onChange={ (e) => onImageInputChange(e, 'A' ) }
@@ -355,6 +356,7 @@ export const AdminPage = () => {
 								<Grid item xs={ 3 } ml={ 3 } mt={ 5 } >
 									<input
 										type="file"
+										accept="image/*" 
 										multiple
 										ref={ coversInputRef }
 										onChange={ (e) => onImageInputChange(e, 'P' ) }
@@ -396,6 +398,7 @@ export const AdminPage = () => {
 								<Grid item xs={ 3 } ml={ 3 } mt={ 5 } >
 									<input
 										type="file"
+										accept="image/*" 
 										multiple
 										ref={ chapterInputRef }
 										onChange={ (e) => onImageInputChange(e, 'C' ) }
@@ -437,6 +440,7 @@ export const AdminPage = () => {
 								<Grid item xs={ 3 } ml={ 3 } mt={ 5 } >
 									<input
 										type="file"
+										accept="image/*" 
 										multiple
 										ref={ extrasInputRef }
 										onChange={ (e) => onImageInputChange(e, 'E' ) }
