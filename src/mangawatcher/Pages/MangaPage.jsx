@@ -9,23 +9,19 @@ import { ListMangaView, MangaView } from "../view";
 
 export const MangaPage = () => {
 	
-	const { activeManga, isLoading, startObtenerUltimoCap, startObtenerPorCapitulo } = useMangaStore();
-	
-	const { id, chapter, ...rest } = useParams();
+	const { activeManga, isLoading, startObtenerChapterPorUID, start } = useMangaStore();
+
+	const { id } = useParams();
 
 	useEffect(() => {
-
-		if( !id || isLoading ) return;
 		
-		if( chapter ) {
+		if( activeManga === null && id ){
 
-			startObtenerPorCapitulo( id, chapter );
-			return;
+			startObtenerChapterPorUID( id );
+
 		}
 
-		startObtenerUltimoCap( id );
-
-	}, [id, chapter])
+	}, [id])
 
 
 	

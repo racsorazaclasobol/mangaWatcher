@@ -1,146 +1,95 @@
 import { useDispatch, useSelector } from "react-redux";
-import { collection, doc, getDoc, getDocs } from "firebase/firestore/lite";
 
-import { FirebaseDB } from "../../firebase/config";
-import { clearActiveManga, onLoading, onLoadMangas, onSetListaCaps, onSetTitleActiveManga, setActiveManga } from "../../store/mymanga/mangaSlice";
+import { clearActiveManga, onLoading, onLoadMangas, onSetListaCaps, setActiveManga } from "../../store/mymanga/mangaSlice";
 import { onCloseModal, onResetCounter } from "../../store/ui/uiSlice";
 import { useUIStore } from "./useUiStore";
+import mangaApi from "../../api/mangaApi";
 
 export const useMangaStore = () => {
-
+    
     const dispatch = useDispatch();
-    const { mangas, tituloManga, activeManga, isLoading } = useSelector( state => state.manga )
-    const { navigate, resetCounter } = useUIStore();
+    const { mangas, activeManga, isLoading } = useSelector( state => state.manga )
+    const { navigate } = useUIStore();
+    
 
+    //* ACTUALIZADO CON BACKEND NODE
+    //TODO: Validaciones
     const startObtenerTitulosMangas = async() => {
 
         dispatch( onLoading() );
-        
-        const mangaTitles = [];
 
         try {
 
-            const collRef = collection( FirebaseDB, 'mangas' );
-            const mangaDoc =  await getDocs( collRef );
-                
-            mangaDoc.forEach( doc => {
-                mangaTitles.push( { id: doc.id, ...doc.data() } );
-            } )
+            const { data } = await mangaApi.get( '/mangas' );
             
-            dispatch( onLoadMangas( mangaTitles ) );
+            dispatch( onLoadMangas( data ) );
 
         } catch (error) {
-
-        }
-
-    }
-
-    const startObtenerUltimoCap = async ( mangaId = '', tituloManga = '' ) => {
-        
-        if( mangaId === '' ) {
+            console.log( error );
             abortarMision();
-            return;
         }
-
-        dispatch( onLoading() );
-        dispatch( onResetCounter());
-
-        const mangaChapters = [];
-        const chaptersNumber = [];
-
-        if( tituloManga === ''){
-            const infoMangaRef = doc( FirebaseDB, `mangas/${ mangaId }` );
-            const infoManga = await getDoc( infoMangaRef );
-
-            if( !infoManga.data() ) {
-                abortarMision() 
-                return; 
-            };
-
-            const { titulo } = infoManga.data()
-            tituloManga = titulo;
-        }
-        
-        const mandaChapterRef = collection( FirebaseDB, `mangas/${ mangaId }/capitulos` );
-        const mangaChapter = await getDocs( mandaChapterRef );
-                
-        mangaChapter.forEach( chapter => {
-            mangaChapters.push( { id: chapter.id, tituloManga, ...chapter.data() } );
-            chaptersNumber.push( chapter.id );
-        } )
-
-        const lastChapter = Math.max( ...chaptersNumber );
-        const chapter = mangaChapters.filter( chapter => chapter.id === lastChapter.toString() );
-        
-        dispatch( setActiveManga( chapter[0] ) );
-        dispatch( onSetListaCaps( chaptersNumber ) );
 
     }
 
-    const startObtenerPorCapitulo = async ( mangaId = '', chapterNumber = 0, tituloManga = '' ) => {
-        
+    //* ACTUALIZADO CON BACKEND NODE
+    //TODO: Validaciones
+    const startObtenerUltimoCap = async ( mangaId = '' ) => {    
+
         try {
             
-            if( mangaId === '' || chapterNumber === 0 ) {
-                abortarMision() 
-                return; 
-            };
+            if( mangaId === '' ) return abortarMision();
+    
+            dispatch( onLoading() );
+            dispatch( onResetCounter());
+            
+            const { data: chapter }      = await mangaApi.get( `/chapters/last/${ mangaId }` );
+            const { data: listChapters } = await mangaApi.get( `/chapters/list/${ mangaId }` );
+
+            dispatch( setActiveManga( chapter ) );
+            dispatch( onSetListaCaps( listChapters ) );
+
+            navigate(`/reading/${ chapter.uid }`);
+
+        } catch (error) {
+            console.log( error );
+            abortarMision();
+        }
+
+    }
+
+    //* ACTUALIZADO CON BACKEND NODE
+    //TODO: Validaciones
+    const startObtenerChapterPorUID = async( chapterID = '' ) => {
+
+        if ( chapterID === '' ) return abortarMision();
+
+        try {
 
             dispatch( onLoading() );
-            dispatch( onResetCounter() );
+            dispatch( onResetCounter());
 
-            
-            const chaptersNumber = [];
+            const { data: chapter } = await mangaApi.get( `/chapters/byid/${ chapterID }` );
 
-            if( tituloManga === ''){
-                const infoMangaRef = doc( FirebaseDB, `mangas/${ mangaId }` );
-                const infoManga = await getDoc( infoMangaRef );
+            if( !chapter ) return abortarMision();
 
-                if( !infoManga ) {
-                    abortarMision() 
-                    return; 
-                };
-
-                const { titulo } = infoManga.data()
-                tituloManga = titulo;
-            }
-
-            const mangaChapterRef = doc( FirebaseDB, `mangas/${ mangaId }/capitulos/${ chapterNumber }` );
-            const mangaChapter = await getDoc( mangaChapterRef );
-
-            if( !mangaChapter.data() ) {
-                abortarMision() 
-                return; 
-            };
-
-            const listaChaptersRef = collection( FirebaseDB, `mangas/${ mangaId }/capitulos` );
-            const listaChapters = await getDocs( listaChaptersRef );
-
-            if( !listaChapters ) {
-                abortarMision() 
-                return; 
-            };
-
-                    
-            listaChapters.forEach( chapter => {
-                chaptersNumber.push( chapter.id );
-            } )
-            
-            const chapter = { ...mangaChapter.data(), tituloManga }
+            const { data: listChapters } = await mangaApi.get( `/chapters/list/${ chapter.manga._id }` );
             
             dispatch( setActiveManga( chapter ) );
-            dispatch( onSetListaCaps( chaptersNumber ) )
+            dispatch( onSetListaCaps( listChapters ) );
+
+            navigate(`/reading/${ chapter.uid }`);
             
         } catch (error) {
             console.log(error);
             abortarMision();
         }
+
     }
 
     const abortarMision = () => {
 
         navigate('/home');
-        resetCounter();
+        startLimpiarMangaActivo();
         dispatch( clearActiveManga() );
     }
 
@@ -152,15 +101,15 @@ export const useMangaStore = () => {
 
     return {
         //* Propiedades y Objetos
-        mangas,
         activeManga,
         isLoading,
+        mangas,
 
         //* Funciones y Metodos
+        startLimpiarMangaActivo,
+        startObtenerChapterPorUID,
         startObtenerTitulosMangas,
         startObtenerUltimoCap,
-        startLimpiarMangaActivo,
-        startObtenerPorCapitulo,
     }
 
 }

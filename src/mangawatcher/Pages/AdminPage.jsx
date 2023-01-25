@@ -34,7 +34,6 @@ export const AdminPage = () => {
 		
 	const { styleMode } = useUIStore();
 	const { startLogout, user } = useAuthStrore();
-	console.log({user})
 	
 	const { 
 			formState, manga, capitulo, titulo, isFormValid, mangaValid, capituloValid, tituloValid, 

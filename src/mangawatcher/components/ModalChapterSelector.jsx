@@ -5,7 +5,6 @@ import { useUIStore } from '../hooks/useUiStore';
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
 import { useForm } from '../../hooks';
 import { useMangaStore } from '../hooks';
-import { useEffect } from 'react';
 
 const customStyles = {
     content: {
@@ -35,10 +34,14 @@ const initialForm = {
 
 export const ModalChapterSelector = () => {
 
-    const { isOpenChapterModal, closeChapterModal, navigate } = useUIStore();
-    const { activeManga, startObtenerPorCapitulo } = useMangaStore();
-    const { chapter, formState, onInputChange, onResetForm } = useForm( initialForm );
-    const { listaCaps, manga, tituloManga } = activeManga;
+    const { isOpenChapterModal, closeChapterModal, navigate }   = useUIStore();
+    const { activeManga, startObtenerChapterPorUID }            = useMangaStore();
+
+
+    const { chapter, onInputChange, onResetForm }    = useForm( initialForm );
+    const { listaCaps } = activeManga;
+
+    //TODO: Aplicar memo a listaCaps
 
     const onCloseModal = () => {
         closeChapterModal();
@@ -46,11 +49,10 @@ export const ModalChapterSelector = () => {
     } 
 
     const onSelectChapter = () => {
+        
         if( chapter === 0 ) return;
 
-        startObtenerPorCapitulo( manga, chapter, tituloManga )
-
-        navigate( `/manga/${ manga }/${ chapter }` );
+        startObtenerChapterPorUID( chapter );
 
         onCloseModal();
     }
@@ -87,8 +89,8 @@ export const ModalChapterSelector = () => {
                         >
                             <MenuItem value={ 0 } disabled > Seleccione... </MenuItem>
                             {
-                                listaCaps.map( capitulo => ( 
-                                    <MenuItem key={ capitulo } value={ capitulo } > { capitulo } </MenuItem>
+                                listaCaps.map( ({ capitulo, uid }) => ( 
+                                    <MenuItem key={ uid } value={ uid } > { capitulo } </MenuItem>
                                 ) )
                             }
 

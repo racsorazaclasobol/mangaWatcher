@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useMangaStore, useUIStore } from "../hooks";
 import { Grid } from "@mui/material";
 import { ButtonInvisible, TitleMangas, InfoCapitulo } from "./";
@@ -9,6 +8,9 @@ export const ButtomVisualizador = () => {
 	const { counter } = useUIStore();
 
 	const { paginas } = activeManga;
+
+	//TODO: Agregar memo a paginas
+
 	const lastPage = paginas.length - 1;
 	const pag = paginas[counter].url;	
 	

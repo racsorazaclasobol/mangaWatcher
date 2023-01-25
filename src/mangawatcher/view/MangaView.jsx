@@ -10,7 +10,9 @@ export const MangaView = () => {
 	const { startLimpiarMangaActivo } = useMangaStore();
 	
 	window.onpopstate = () => {
+
 		startLimpiarMangaActivo();
+
 	}
 
 	useEffect( () => {
