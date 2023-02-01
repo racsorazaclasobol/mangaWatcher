@@ -1,58 +1,22 @@
-import { collection, doc, getDocs, setDoc } from "firebase/firestore/lite";
 import { useDispatch, useSelector } from "react-redux";
-import { FirebaseDB } from "../../firebase/config";
-import { onCreating, setImagesNewChapter, onSetNewChapter, onCreatedDone, onClearStore, onLoading, onSetInfoManga } from "../../store/admin/adminSlice";
-import { fileUpload } from "../helpers/fileUpload";
+import mangaApi from "../../api/mangaApi";
+import { onCreating, onSetNewChapter, onCreatedDone, onClearStore, onLoading, onSetInfoManga, onSetMangaTitles } from "../../store/admin/adminSlice";
 
 export const useAdminStore = () => {
 
     const dispatch = useDispatch();
 
-    const { newChapter, message, isCreating, isLoading, infoManga } = useSelector( state => state.admin );
+    const { listMangaTitles, newChapter, message, isCreating, isLoading, infoManga } = useSelector( state => state.admin );
     const { mangas: mangaList } = useSelector( state => state.manga );
 
-    const startSubirImagenes = async ( files = [] ) => {
 
-        dispatch( onCreating( true ) );
-
-        for ( const file of files ) {
-            file.url = await fileUpload( file.file )
-        }
-
-        const filesToUpload = files.map( (currentValue, index, array) => {
-
-            const tipo = currentValue.name.charAt(0);
-            const paginaSinExtencion = currentValue.name.replace('.webp', '');
-            const pagina = paginaSinExtencion.replace(tipo, '');
-
-            return {
-                pagina: pagina,
-                tipo: tipo,
-                url: currentValue.url
-            }
-        });
-
-        dispatch( setImagesNewChapter( filesToUpload ) );
-
-        startGuardarCapitulo( filesToUpload );
+    const startClearStore = () => {
+        dispatch ( onClearStore() );
     }
 
-    const startGuardarCapitulo = async( paginas ) => {
-        
-        try {
-            
-            const chapterToFirestore = { ...newChapter };
-            chapterToFirestore.paginas = paginas;
-
-            const docRef = doc( FirebaseDB, `mangas/${ newChapter.manga }/capitulos/${ newChapter.capitulo }` );
-            await setDoc( docRef, chapterToFirestore, { merge: true } );
-            
-            dispatch( onCreatedDone('Capítulo agregado correctamente.') );
-            
-        } catch (error) {
-            console.log(error)
-        }
-    }
+    /* **************************************** */
+    /*          MANEJO DE CHAPTERS              */
+    /* **************************************** */
 
     const startStoreNuevoCapitulo = ( formState ) => {
 
@@ -60,46 +24,105 @@ export const useAdminStore = () => {
 
     }
 
-    const startClearStore = () => {
-        dispatch ( onClearStore() );
+    //TODO: Validaciones
+    const startSaveChapter = async ( files = [] ) => {
+
+        dispatch( onCreating( true ) );
+        
+        try {
+        
+            const chapterToSave = { ...newChapter };
+            
+            let formData = new FormData();
+            
+            const { data } = await mangaApi.post( '/chapters/', chapterToSave );
+            
+            for ( const fileSelected of files ) {
+                const { file } = fileSelected;
+                formData.append( 'archivo', file );                
+            }
+            
+            await mangaApi.put( `/uploads/${ data.uid }`, formData, { headers: { 'Content-Type': 'multipart/form-data' } } );
+
+            dispatch( onCreatedDone('Capítulo agregado correctamente.') );
+            
+        } catch (error) {
+            console.log(error)
+            
+        }        
     }
 
-    const startObtenerUltimoCap = async ( mangaId, titulo ) => {
+    //TODO: Validaciones
+    const startObtenerTitulosMangas = async() => {
 
         dispatch( onLoading() );
 
-        const mangaChapters = [];
-        const chaptersNumber = [];
+        try {
+            
+            let mangaList = [];
 
-        const collRef = collection( FirebaseDB, `mangas/${ mangaId }/capitulos` );
-        const mangaDoc = await getDocs( collRef );
+            const { data } = await mangaApi.get( '/mangas/' );
 
-        mangaDoc.forEach( chapter => {
-            mangaChapters.push( { id: chapter.id, tituloManga: titulo, ...chapter.data() } );
-            chaptersNumber.push( chapter.id );
-        } )
-        
-        const lastChapter = Math.max( ...chaptersNumber );
-        const chapter = mangaChapters.filter( chapter => chapter.id === lastChapter.toString() );
+            for (const manga of data) {
 
-        dispatch( onSetInfoManga( chapter[0] ) );
+                const { data } = await mangaApi.get( `/chapters/last/${ manga.uid }` );
+                
+                const newManga = { ...manga, lastChapter: data.capitulo };
+                
+                mangaList.push( newManga );
+                
+            };
+
+            dispatch( onSetMangaTitles( mangaList ) );
+            
+        } catch (error) {
+            console.log(error)
+            
+        }
 
     }
+
+    //TODO: Validaciones
+    const startObtenerUltimoCap = async ( mangaId = '' ) => {
+
+        try {
+            
+            if( mangaId === '' ) return;
+    
+            dispatch( onLoading() );
+            dispatch( onResetCounter());
+            
+            const { data: chapter } = await mangaApi.get( `/chapters/last/${ mangaId }` );
+
+            dispatch( onSetInfoManga( chapter ) );
+
+        } catch (error) {
+            console.log( error );
+            //TODO: Mejorar manejo del error
+        }
+
+    }
+
+  
+
+    
 
 
     return {
         //Propiedades y Objetos
-        mangaList,
-        message,
+        infoManga,
         isCreating,
         isLoading,
-        infoManga,
+        mangaList,
+        message,
+        listMangaTitles,
 
         //Metodos y Funciones
-        startSubirImagenes,
+        startSaveChapter,
         startStoreNuevoCapitulo,
         startClearStore,
         startObtenerUltimoCap,
+        startObtenerTitulosMangas
     }
 
 }
