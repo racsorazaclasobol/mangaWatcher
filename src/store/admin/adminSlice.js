@@ -9,6 +9,7 @@ export const adminSlice = createSlice({
         newChapter: null,
         newManga: null,
         infoManga: null,
+        listMangaTitles: []
     },
     reducers: {
         onCreating: ( state, { payload } ) => {
@@ -30,21 +31,30 @@ export const adminSlice = createSlice({
         onSetInfoManga: ( state, { payload } ) => {
             state.infoManga = payload;
             state.isLoading = false;
+
+        },
+        onSetMangaTitles: ( state, { payload } ) => {
+            state.listMangaTitles = payload;
+            state.isLoading = false;
         },
         onClearStore: ( state ) => {
-            state.newChapter = null;
+            state.isCreating = false;
+            state.isLoading = false;
             state.message = '';
+            state.newChapter = null;
+            state.newManga = null;
         },
     },
 })
 
 export const { 
+                onClearStore,
+                onCreatedDone,
                 onCreating, 
                 onLoading,
+                onSetInfoManga,
+                onSetMangaTitles,
                 onSetNewChapter, 
                 setImagesNewChapter, 
-                onCreatedDone,
-                onSetInfoManga,
-                onClearStore,
 
             } = adminSlice.actions

@@ -27,8 +27,19 @@ const formValidation = {
 export const AdminPage = () => {
 	
 	const { 
-			mangaList, message, isCreating, isLoading, infoManga, 
-			startSubirImagenes, startStoreNuevoCapitulo, startClearStore, startObtenerUltimoCap 
+			//Parametros y Objetos
+			infoManga, 
+			isCreating, 
+			isLoading, 
+			listMangaTitles, 
+			message, 
+
+			//Metodos y funciones
+			startClearStore, 
+			startObtenerTitulosMangas,
+			startStoreNuevoCapitulo, 
+			startSaveChapter, 
+
 		} = useAdminStore();
 
 		
@@ -61,23 +72,23 @@ export const AdminPage = () => {
 
 		if( target.files === 0 ) return;
 		
-		const files = extractCardFile( target.files );
+		const filePreview = extractCardFile( target.files );
 
 		switch (tipo) {
 			case 'A':
-				setThanksTitlesList( files );
+				setThanksTitlesList( filePreview );
 				break;
 			
 			case 'P':
-				setCoverTitlesLists( files );
+				setCoverTitlesLists( filePreview );
 				break;
 
 			case 'C':
-				setChapterTitlesLists( files );
+				setChapterTitlesLists( filePreview );
 				break;
 
 			case 'E':
-				setExtrasTitlesList( files );
+				setExtrasTitlesList( filePreview );
 				break;
 		
 			default:
@@ -87,7 +98,7 @@ export const AdminPage = () => {
 
 	const extractCardFile = ( targetFiles ) => {
 
-		const files = [];
+		let files = [];
 
 		for ( const file of targetFiles ){
 			const result = previewImages( file );
@@ -119,6 +130,8 @@ export const AdminPage = () => {
 		setFormSubmitted(false);
 
 		startClearStore();
+		
+		window.location.reload(true);
 
 	}
 
@@ -132,9 +145,7 @@ export const AdminPage = () => {
 			return;
 		}
 
-
-
-		startSubirImagenes( allImages );
+		startSaveChapter( allImages );
 
 	}
 
@@ -158,39 +169,31 @@ export const AdminPage = () => {
 			onClearForm();
 		}
 	},[ message ] )
-	
-	useEffect( () => {
-		if( infoManga ){
-			const { capitulo } = infoManga; 
-			
-			setUltimoCapitulo( capitulo );
-			
-		}
-	}, [ infoManga ] )
 
 	useEffect(() => {
-		if( manga ) {
+		
+		if ( !manga || !listMangaTitles || listMangaTitles?.length === 0 ) return;
 
-			startObtenerUltimoCap(manga);
+		let { lastChapter } = listMangaTitles.filter( ({ uid }) => uid === manga )[0];
 
-	  	}
-  	}, [ manga ])
 
-	useEffect(() => {
-
-		if( !ultimoCapitulo ) return;
-
-		let siguienteCapitulo = parseInt( ultimoCapitulo );
-
+		setUltimoCapitulo( lastChapter );
+		 
 		const target = {
-			value: siguienteCapitulo += 1, 
+			value: lastChapter += 1, 
 			name: 'capitulo'
 		}
 		
 		onInputCustomChange( target );
 
+  	}, [ manga ])
 
-	}, [ultimoCapitulo])
+	useEffect(() => {
+
+		startObtenerTitulosMangas();
+	
+	}, [])
+	
 	
 
 	return (
@@ -245,9 +248,9 @@ export const AdminPage = () => {
 											error={ !!mangaValid && formSubmitted && !isFormValid }
 										>
 											{
-												mangaList.map( manga => (
+												listMangaTitles.map( ({ uid, nombre }) => (
 
-													<MenuItem key={manga.id} value={ manga.id } > { manga.titulo } </MenuItem>
+													<MenuItem key={uid} value={ uid } > { nombre } </MenuItem>
 
 												) )
 											}
@@ -261,7 +264,7 @@ export const AdminPage = () => {
 									<TextField
 										type="number"
 										fullWidth
-										placeholder="Seleccione un anime"
+										placeholder="Ingrese Capítulo"
 										label={ ( ultimoCapitulo ) ? `Ult: ${ ultimoCapitulo }` : 'Capítulo' }
 										name="capitulo"
 										value={ capitulo }
@@ -313,7 +316,7 @@ export const AdminPage = () => {
 								<Grid item xs={ 3 } ml={ 3 } mt={ 5 } >
 									<input
 										type="file"
-										accept="image/*" 
+										accept="image/*.webp" 
 										multiple
 										ref={ thanksInputRef }
 										onChange={ (e) => onImageInputChange(e, 'A' ) }
