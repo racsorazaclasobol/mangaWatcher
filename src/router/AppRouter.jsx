@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router-dom";
 import { LoginPage } from "../auth/Pages";
 import { SimboloCargando } from "../mangawatcher/components";
 import { useMangaStore, useAuthStrore } from "../mangawatcher/hooks";
-import { AdminPage } from "../mangawatcher/Pages";
+import { AdminMenu, AdminPage } from "../mangawatcher/Pages";
 import { MangaRoutes } from "../mangawatcher/routes/MangaRoutes";
 
 export const AppRouter = () => {
@@ -31,11 +31,11 @@ export const AppRouter = () => {
 				
 				{
 					( status === "authenticated" )
-					? <Route path="/admin" element={ <AdminPage /> } /> //Ruta Privada
-					: <Route path="/admin" element={ <LoginPage /> } /> //Ruta Publica
+					? <Route path="/admin" element={ <AdminMenu /> } /> //Ruta Privada
+					: <Route path="/admin" element={ <LoginPage /> } />
 				}
 
-				<Route path="/*" element={ <MangaRoutes /> }/>
+				<Route path="/*" element={ <MangaRoutes /> }/> 
 
 			</Routes>
 		</>

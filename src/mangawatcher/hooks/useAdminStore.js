@@ -103,7 +103,33 @@ export const useAdminStore = () => {
 
     }
 
-  
+    /* **************************************** */
+    /*            MANEJO DE MANGAS              */
+    /* **************************************** */
+
+        //TODO: Validaciones
+        const startSaveManga = async ( manga ) => {
+
+            dispatch( onCreating( true ) );
+            
+            try {
+            
+                const { portada, ...mangaToSave } = manga;
+                
+                let formData = new FormData();
+                formData.append( 'archivo', portada );                
+                
+                const { data } = await mangaApi.post( '/mangas/', mangaToSave );
+                
+                await mangaApi.put( `/uploads/portada-manga/${ data.uid }`, formData, { headers: { 'Content-Type': 'multipart/form-data' } } );
+    
+                dispatch( onCreatedDone('Manga agregado correctamente.') );
+                
+            } catch (error) {
+                console.log(error)
+                
+            }        
+        }
 
     
 
@@ -122,7 +148,9 @@ export const useAdminStore = () => {
         startStoreNuevoCapitulo,
         startClearStore,
         startObtenerUltimoCap,
-        startObtenerTitulosMangas
+        startObtenerTitulosMangas,
+
+        startSaveManga,
     }
 
 }
