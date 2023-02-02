@@ -103,7 +103,81 @@ export const useAdminStore = () => {
 
     }
 
-  
+    /* **************************************** */
+    /*            MANEJO DE MANGAS              */
+    /* **************************************** */
+
+    //TODO: Validaciones
+    const startSaveManga = async ( manga ) => {
+
+        dispatch( onCreating( true ) );
+        
+        try {
+        
+            const { portada, ...mangaToSave } = manga;
+            
+            let formData = new FormData();
+            formData.append( 'archivo', portada );                
+            
+            const { data } = await mangaApi.post( '/mangas/', mangaToSave );
+            
+            await mangaApi.put( `/uploads/portada-manga/${ data.uid }`, formData, { headers: { 'Content-Type': 'multipart/form-data' } } );
+
+            dispatch( onCreatedDone('Manga agregado correctamente.') );
+            
+        } catch (error) {
+            console.log(error)
+            
+        }        
+    }
+
+    const startGetMangaInfo = async ( uid ) => {
+
+        try {
+
+            dispatch( onCreating( true ) );
+
+            const { data } = await mangaApi.get( `/mangas/${ uid }` );
+
+            dispatch( onSetInfoManga( data ) );
+            
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+    const startUpdateManga = async ( manga ) => {
+
+        dispatch( onCreating( true ) );
+        
+        try {
+        
+            const { portada, ...mangaToUpdate } = manga;
+            const { uid } = mangaToUpdate;
+
+            if( typeof portada === 'string' ){
+                
+                await mangaApi.put( `/mangas/${ uid }`, manga );
+                
+                dispatch( onCreatedDone('Manga agregado correctamente.') );
+                
+                return;
+            }
+
+            let formData = new FormData();
+            formData.append( 'archivo', portada );     
+            
+            const { data } = await mangaApi.put( `/mangas/${ uid }`, mangaToUpdate );
+        
+            await mangaApi.put( `/uploads/portada-manga/${ data.uid }`, formData, { headers: { 'Content-Type': 'multipart/form-data' } } );
+
+            dispatch( onCreatedDone('Manga agregado correctamente.') );
+            
+        } catch (error) {
+            console.log(error)
+        }        
+    }
 
     
 
@@ -118,11 +192,15 @@ export const useAdminStore = () => {
         listMangaTitles,
 
         //Metodos y Funciones
+        startClearStore,
+        startObtenerTitulosMangas,
+        startObtenerUltimoCap,
         startSaveChapter,
         startStoreNuevoCapitulo,
-        startClearStore,
-        startObtenerUltimoCap,
-        startObtenerTitulosMangas
+
+        startSaveManga,
+        startUpdateManga,
+        startGetMangaInfo,
     }
 
 }

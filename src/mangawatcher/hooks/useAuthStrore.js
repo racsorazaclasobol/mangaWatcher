@@ -46,6 +46,7 @@ export const useAuthStrore = () => {
         dispatch( onChecking() );
 
         onAuthStateChanged( FirebaseAuth, (user) => {
+            
             if( !user ) return dispatch( onLogout() );
 
             const { uid, displayName, email, accessToken } = user;
