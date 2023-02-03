@@ -12,14 +12,19 @@ Tecnologías utilizadas:
 * React Redux Toolkit.
 * Material UI.
 * Bootstrap 5 (en menor medida).
+
+* API Rest: Node.JS Backend.
 * Firebase Authentication.
-* Firebase Firestore.
+* Firebase Firestore. (Reemplazado por MongoDB en el Backend)
+
+* Vercel ( Frontend )
+* Heroku ( Backend )
 
 ```
 Credenciales Cuenta Demo
 --------------------------------------------------------
 
-Admin page: https://otakuplanet.cl/mymanga/#/admin
+Admin page: https://mymanga.vercel.app/
 
 Correo: demo@gmail.com
 Password: 123456789
