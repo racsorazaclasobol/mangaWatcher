@@ -31,6 +31,14 @@ export const darkTheme = createTheme({
         error:{
             main: red.A400
             
-        }
+        },
+        breakpoints: {
+            values: {
+              mobile: 0,
+              tablet: 640,
+              laptop: 1024,
+              desktop: 1200,
+            },
+          },
     }
 });
