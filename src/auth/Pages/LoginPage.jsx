@@ -3,7 +3,6 @@ import { Button, Divider, Grid, TextField, Typography } from "@mui/material"
 import { useForm } from "../../hooks";
 import { useAuthStrore, useUIStore } from "../../mangawatcher/hooks"
 import { MangaLayout } from "../../mangawatcher/layout/MangaLayout"
-import { Breakpoints } from '../../mangawatcher/components/Public/Breakpoints'
 
 const loginFormField = {
     loginEmail: '',
@@ -40,7 +39,6 @@ export const LoginPage = () => {
 
 
                     <Grid item xs={ 12 } sm={ 10 } md={ 7 } lg={ 6 } xl={ 4 } textAlign='center' bgcolor={`${ styleMode }.gray.suave`} sx={{ borderRadius: '10px' }} p={5} className='box-shadow'>
-                    <Breakpoints />
                         <Typography variant="h5"> Iniciar Sesión </Typography>
                         <Divider sx={{ marginBottom: '16px', marginTop: '16px' }} />
 

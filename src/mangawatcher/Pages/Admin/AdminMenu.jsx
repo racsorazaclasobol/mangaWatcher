@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import { Grid, Typography, Box, Card, CardMedia, CardContent, Divider } from "@mui/material"
 
 import { MangaLayout } from "../../layout/MangaLayout"
-import { Breakpoints } from '../../components/Public/Breakpoints'
 
 export const AdminMenu = () => {
 
@@ -10,8 +9,6 @@ export const AdminMenu = () => {
         <>
             <MangaLayout>
                 <Grid container minheight={'calc(100vh - 230px)'}>
-
-                    <Breakpoints />
                     
                     <Grid container spacing={ 2 } justifyContent='center' mb={ 5 }>
 

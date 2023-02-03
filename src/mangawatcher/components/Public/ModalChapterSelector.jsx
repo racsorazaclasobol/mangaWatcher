@@ -4,7 +4,6 @@ import { Button, FormControl, Grid, InputLabel, MenuItem, Select, Typography } f
 
 import { useForm } from '../../../hooks';
 import { useMangaStore, useUIStore } from '../../hooks/';
-import { Breakpoints } from './Breakpoints'
 
 const customStyles = {
     content: {

@@ -7,7 +7,7 @@ import { Button, Divider, FormControl, FormHelperText, Grid, IconButton, InputLa
 
 import { useForm } from "../../../hooks"
 import { useUIStore, useAdminStore, useAuthStrore } from "../../hooks";
-import { CardImagePreview, ChapterImagePreview, SimboloCargando, Breakpoints } from "../../components";
+import { ChapterImagePreview, SimboloCargando } from "../../components";
 
 
 const initialForm = {
@@ -206,7 +206,7 @@ export const AdminAddChapter = () => {
 						
 						<Grid item xs={ 12 } md={ 10 } lg={ 10 } sx={{ backgroundColor: `${ styleMode }.gray.claro` }} p={5} >
 							<Grid container spacing={ 2 }>
-								<Breakpoints />
+
 								<Grid item xs={ 11 }  >
 									<Typography variant="h4">
 										Subir Capitulos
