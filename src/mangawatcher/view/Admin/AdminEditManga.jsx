@@ -6,6 +6,8 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useForm } from "../../../hooks"
 import { useAdminStore, useUIStore } from "../../hooks";
 import { CardImagePreview } from "../../components";
+import { Breakpoints } from '../../components/Public/Breakpoints'
+
 
 let initialForm = {
     uid: '',
@@ -123,8 +125,9 @@ export const AdminEditManga = () => {
 
 					<Grid container direction='row' justifyContent='center' minHeight='100vh' pb={ 5 } sx={{ backgroundColor: `${ styleMode }.dark` }} >
 						
-						<Grid item xs={ 10 } p={5} sx={{ backgroundColor: `${ styleMode }.gray.claro` }} >
-							<Grid container spacing={ 2 }>
+						<Grid item xs={ 12 } md={ 10 } lg={ 9 } p={ 5 } sx={{ backgroundColor: `${ styleMode }.gray.claro` }} >
+							<Breakpoints />
+                            <Grid container spacing={ 2 }>
 								
 								<Grid item xs={ 11 }  >
 									<Typography variant="h4">
@@ -149,7 +152,7 @@ export const AdminEditManga = () => {
 									<Divider />
 								</Grid>
 
-                                <Grid item xs={ 4 } mr={ 3 }  mb={ 3 }>
+                                <Grid item xs={ 12 } mr={ 3 }  mb={ 3 }>
 									<FormControl fullWidth>
 										<InputLabel id="animeTitleLabel">Manga</InputLabel>
 										<Select
@@ -182,7 +185,7 @@ export const AdminEditManga = () => {
 								</Grid>
 
                                 <Grid container display={ ( mangaSelected === 0 ) ? 'none' : '' } className="animate__animated animate__fadeIn" spacing={ 2 }>
-                                    <Grid item xs={ 6 } >
+                                    <Grid item xs={ 12 } lg={ 6 } >
                                         <TextField
                                             type="text"
                                             fullWidth
@@ -195,7 +198,7 @@ export const AdminEditManga = () => {
                                         
                                     </Grid>
 
-                                    <Grid item xs={ 6 } >
+                                    <Grid item xs={ 12 } lg={ 6 } >
                                         <TextField
                                             type="text"
                                             fullWidth
