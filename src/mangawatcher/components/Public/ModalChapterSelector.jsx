@@ -4,6 +4,7 @@ import { Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/ma
 
 import { useForm } from '../../../hooks';
 import { useMangaStore, useUIStore } from '../../hooks/';
+import { Breakpoints } from './Breakpoints'
 
 const customStyles = {
     content: {
@@ -11,8 +12,8 @@ const customStyles = {
         left: '50%',
         right: 'auto',
         bottom: 'auto',
-        marginRight: '-20%',
-        transform: 'translate(-50%, -50%)',
+        marginRight: '0%',
+        transform: 'translate(0%, -50%)',
     },
 };
 
