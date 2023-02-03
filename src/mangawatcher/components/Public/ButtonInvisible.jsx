@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material"
 import { useEffect } from "react";
-import { useUIStore } from "../hooks"
+import { useUIStore } from "../../hooks"
 
 export const ButtonInvisible = ( {lastPage} ) => {
 

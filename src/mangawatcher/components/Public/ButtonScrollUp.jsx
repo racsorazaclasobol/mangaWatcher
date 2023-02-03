@@ -1,4 +1,4 @@
-import { useUIStore } from "../hooks"
+import { useUIStore } from "../../hooks"
 
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 

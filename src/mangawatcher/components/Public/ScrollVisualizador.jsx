@@ -1,6 +1,6 @@
 import { Grid } from "@mui/material";
-import { useMangaStore } from "../hooks";   
-import { ImageMangaPages, TitleMangas } from "./";
+import { useMangaStore } from "../../hooks";   
+import { ImageMangaPages, TitleMangas } from "../";
 
 export const ScrollVisualizador = () => {
 

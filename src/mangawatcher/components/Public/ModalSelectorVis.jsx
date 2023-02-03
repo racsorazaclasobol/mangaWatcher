@@ -1,9 +1,9 @@
 
 import Modal from 'react-modal'
-import { useUIStore } from '../hooks/useUiStore';
-
 import SwipeIcon from '@mui/icons-material/Swipe';
 import SwipeVerticalIcon from '@mui/icons-material/SwipeVertical';
+
+import { useUIStore } from '../../hooks/useUiStore';
 
 const customStyles = {
     content: {

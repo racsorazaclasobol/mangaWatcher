@@ -1,10 +1,9 @@
 
 import Modal from 'react-modal'
-import { useUIStore } from '../hooks/useUiStore';
-
 import { Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
-import { useForm } from '../../hooks';
-import { useMangaStore } from '../hooks';
+
+import { useForm } from '../../../hooks';
+import { useMangaStore, useUIStore } from '../../hooks/';
 
 const customStyles = {
     content: {

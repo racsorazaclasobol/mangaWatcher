@@ -1,5 +1,5 @@
 import { Grid, IconButton, Tooltip, Typography } from "@mui/material";
-import { useMangaStore, useUIStore } from "../hooks";
+import { useMangaStore, useUIStore } from "../../hooks";
 import PinIcon from '@mui/icons-material/Pin';
 import { ModalChapterSelector } from "./ModalChapterSelector";
 

@@ -1,6 +1,7 @@
 import { Grid, Typography } from "@mui/material"
 import { useEffect, useState } from "react";
-import { useUIStore } from "../hooks";
+
+import { useUIStore } from "../../hooks";
 
 export const InfoCapitulo = ({ pagina }) => {
 

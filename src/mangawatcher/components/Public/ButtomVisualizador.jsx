@@ -1,6 +1,6 @@
-import { useMangaStore, useUIStore } from "../hooks";
+import { useMangaStore, useUIStore } from "../../hooks";
 import { Grid } from "@mui/material";
-import { ButtonInvisible, TitleMangas, InfoCapitulo } from "./";
+import { ButtonInvisible, TitleMangas, InfoCapitulo } from "../";
 
 export const ButtomVisualizador = () => {
 

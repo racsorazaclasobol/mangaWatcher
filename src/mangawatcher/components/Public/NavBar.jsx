@@ -1,5 +1,5 @@
 import { Box, Grid } from '@mui/material'
-import { useUIStore, useMangaStore } from '../hooks';
+import { useUIStore, useMangaStore } from '../../hooks';
 
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import NightlightOutlinedIcon from '@mui/icons-material/NightlightOutlined';
