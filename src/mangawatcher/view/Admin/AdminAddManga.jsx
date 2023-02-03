@@ -6,6 +6,8 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { useForm } from "../../../hooks"
 import { useAdminStore, useUIStore } from "../../hooks";
 import { CardImagePreview } from "../../components";
+import { Breakpoints } from '../../components/Public/Breakpoints'
+
 
 const initialForm = {
     nombre: '',
@@ -60,8 +62,8 @@ export const AdminAddManga = () => {
         <Grid container minHeight='100vh' direction='column'  >	
 
 					<Grid container direction='row' justifyContent='center' minHeight='100vh' pb={ 5 } sx={{ backgroundColor: `${ styleMode }.dark` }} >
-						
-						<Grid item xs={ 10 } p={5} sx={{ backgroundColor: `${ styleMode }.gray.claro` }} >
+						<Grid item xs={ 12 } md={ 10 } lg={ 9 } p={ 5 } sx={{ backgroundColor: `${ styleMode }.gray.claro` }} >
+						<Breakpoints />
 							<Grid container spacing={ 2 }>
 								
 								<Grid item xs={ 11 }  >
@@ -87,7 +89,7 @@ export const AdminAddManga = () => {
 									<Divider />
 								</Grid>
 
-								<Grid item xs={ 6 } >
+								<Grid item xs={ 12 } lg={ 6 } >
 									<TextField
 										type="text"
 										fullWidth
@@ -100,7 +102,7 @@ export const AdminAddManga = () => {
 									
 								</Grid>
 
-								<Grid item xs={ 6 } >
+								<Grid item xs={ 12 } lg={ 6 } >
 									<TextField
 										type="text"
 										fullWidth
