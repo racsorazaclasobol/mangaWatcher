@@ -8,7 +8,7 @@ export const AdminMenu = () => {
     return (
         <>
             <MangaLayout>
-                <Grid container minheight={'calc(100vh - 230px)'}>
+                <Grid container minHeight={'calc(100vh - 230px)'} mt={ 5 }>
                     
                     <Grid container spacing={ 2 } justifyContent='center' mb={ 5 }>
 
