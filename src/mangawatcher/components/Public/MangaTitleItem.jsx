@@ -16,7 +16,7 @@ export const MangaTitleItem = () => {
             {
                 mangas.map( ({ uid, nombre, portada, autor }) => (
                     <>
-                        <Grid key={ uid } item xs={ 3.5 } onClick={ () => onOpenManga( uid, nombre ) } className="pointer" >
+                        <Grid key={ uid } item xs={ 12 } sm={ 6 } md={ 4 } xl={ 3.5 } onClick={ () => onOpenManga( uid, nombre ) } className="pointer" >
                             <Card sx={{ display: 'flex', height: '200px', justifyContent: 'flex-start' }}>
                                 <CardMedia
                                     component="img"
