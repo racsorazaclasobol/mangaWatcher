@@ -1,10 +1,9 @@
-import { Grid, Card, CardContent, CardMedia, Typography } from "@mui/material";
-import { useMangaStore, useUIStore } from "../hooks";
+import { Grid, Card, CardContent, CardMedia, Typography, Box, Divider } from "@mui/material";
+import { useMangaStore } from "../hooks";
 
 export const MangaTitleItem = () => {
 
     const { mangas, startObtenerUltimoCap } = useMangaStore();
-    const { navigate } = useUIStore();
     
     const onOpenManga = ( mangaId ) => {
        
@@ -16,27 +15,33 @@ export const MangaTitleItem = () => {
         <>
             {
                 mangas.map( ({ uid, nombre, portada, autor }) => (
-                    <Grid key={ uid } onClick={ () => onOpenManga( uid, nombre ) } className="box-shadow pointer .d-none" m={2} maxHeight="360px" >
-                        <Card sx={{ maxHeight: '380px', width: 300 }}>
+                    <>
+                        <Grid key={ uid } item xs={ 3.5 } onClick={ () => onOpenManga( uid, nombre ) } className="pointer" >
+                            <Card sx={{ display: 'flex', height: '200px', justifyContent: 'flex-start' }}>
+                                <CardMedia
+                                    component="img"
+                                    sx={{ width: 180, float:'right', boxShadow: '0px 0 7px 2px #888' }}
+                                    image={ portada }
+                                    alt=""
+                                />
+                                <Box sx={{ display: 'flex', flexDirection: 'column' }} mt={ 2 }>
+                                    <CardContent sx={{ flex: '1 0 auto' }} >
 
-                            <CardMedia
-                                sx={{ height: '300px' }}
-                                image={ portada }
-                                title={ nombre }
-                            />
+                                        <Typography component="div" variant="h5" color="text.secondary" sx={{ fontWeight: 'bold' }}>
+                                            { nombre }
+                                        </Typography>
 
-                            <CardContent>
-                                <Typography variant="h6" >
-                                    { nombre }
-                                </Typography>
-
-                                <Typography variant="subtitle2" sx={{ textAlign: 'right' }}>
-                                    ~ { autor }
-                                </Typography>
-                            </CardContent>
-
-                        </Card>
-                    </Grid>
+                                        <Divider />
+                                    </CardContent>
+                                    <CardContent>
+                                        <Typography variant="subtitle2" color="text.secondary" component="div">
+                                            ~ { autor }
+                                        </Typography>
+                                    </CardContent>
+                                </Box>
+                            </Card>
+                        </Grid>
+                    </>
                 ))
             }
         </>

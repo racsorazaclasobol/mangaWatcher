@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 
 import { useForm } from "../../../hooks"
-import { MangaLayout } from "../../layout/MangaLayout"
 import { useUIStore, useAdminStore, useAuthStrore } from "../../hooks";
-import { CardImagePreview, SimboloCargando } from "../../components";
+import { CardImagePreview, ChapterImagePreview, SimboloCargando } from "../../components";
 
 import { Button, Divider, FormControl, FormHelperText, Grid, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -61,7 +60,6 @@ export const AdminAddChapter = () => {
 
 	const [formSubmitted, setFormSubmitted] = useState(false);
 	const [validacionImagenes, setValidacionImagenes] = useState(null);
-	
 	
 	const thanksInputRef = useRef();
 	const coversInputRef = useRef();
@@ -193,8 +191,6 @@ export const AdminAddChapter = () => {
 		startObtenerTitulosMangas();
 	
 	}, [])
-	
-	
 
 	return (
 		<>
@@ -314,7 +310,7 @@ export const AdminAddChapter = () => {
 								<Grid item xs={ 3 } ml={ 3 } mt={ 5 } >
 									<input
 										type="file"
-										accept="image/*.webp" 
+										accept=".webp" 
 										multiple
 										ref={ thanksInputRef }
 										onChange={ (e) => onImageInputChange(e, 'A' ) }
@@ -330,12 +326,12 @@ export const AdminAddChapter = () => {
 									</Button>
 								</Grid>
 
-								<Grid item xs={ 10 } >		
+								<Grid item xs={ 12 } >		
 									<Grid container spacing={ 2 }>							
 										{
 											thanksTitlesList.map( thanksFile => (
 
-												<CardImagePreview key={ thanksFile.name } image={ thanksFile.image } title={ thanksFile.name } type={ 'A' } />
+												<ChapterImagePreview key={ thanksFile.name } image={ thanksFile.image } title={ thanksFile.name } />
 
 											) )
 										}
@@ -356,7 +352,7 @@ export const AdminAddChapter = () => {
 								<Grid item xs={ 3 } ml={ 3 } mt={ 5 } >
 									<input
 										type="file"
-										accept="image/*" 
+										accept=".webp" 
 										multiple
 										ref={ coversInputRef }
 										onChange={ (e) => onImageInputChange(e, 'P' ) }
@@ -372,12 +368,12 @@ export const AdminAddChapter = () => {
 									</Button>
 								</Grid>
 
-								<Grid item xs={ 10 } >		
+								<Grid item xs={ 12 } >		
 									<Grid container spacing={ 2 }>							
 										{
 											coverTitlesLists.map( coverFile => (
 
-												<CardImagePreview key={ coverFile.name } image={ coverFile.image } title={ coverFile.name } type={ 'P' } />
+												<ChapterImagePreview key={ coverFile.name } image={ coverFile.image } title={ coverFile.name }  />
 
 											) )
 										}
@@ -398,7 +394,7 @@ export const AdminAddChapter = () => {
 								<Grid item xs={ 3 } ml={ 3 } mt={ 5 } >
 									<input
 										type="file"
-										accept="image/*" 
+										accept=".webp" 
 										multiple
 										ref={ chapterInputRef }
 										onChange={ (e) => onImageInputChange(e, 'C' ) }
@@ -414,12 +410,12 @@ export const AdminAddChapter = () => {
 									</Button>
 								</Grid>
 
-								<Grid item xs={ 10 } >		
+								<Grid item xs={ 12 } >		
 									<Grid container spacing={ 2 }>							
 										{
 											chapterTitlesList.map( chapterFile => (
 
-												<CardImagePreview key={ chapterFile.name } image={ chapterFile.image } title={ chapterFile.name } type={ 'P' } />
+												<ChapterImagePreview key={ chapterFile.name } image={ chapterFile.image } title={ chapterFile.name } />
 
 											) )
 										}
@@ -440,7 +436,7 @@ export const AdminAddChapter = () => {
 								<Grid item xs={ 3 } ml={ 3 } mt={ 5 } >
 									<input
 										type="file"
-										accept="image/*" 
+										accept=".webp" 
 										multiple
 										ref={ extrasInputRef }
 										onChange={ (e) => onImageInputChange(e, 'E' ) }
@@ -461,7 +457,7 @@ export const AdminAddChapter = () => {
 										{
 											extrasTitlesList.map( extraFile => (
 
-												<CardImagePreview key={ extraFile.name } image={ extraFile.image } title={ extraFile.name } type={ 'P' } />
+												<ChapterImagePreview key={ extraFile.name } image={ extraFile.image } title={ extraFile.name } />
 
 											) )
 										}
@@ -483,8 +479,6 @@ export const AdminAddChapter = () => {
 										? ( <Button variant="contained" onClick={ alertDemoMessage }> Guardar </Button> )
 										: ( <Button variant="contained" onClick={ onSaveManga }> Guardar </Button> )
 									}
-
-									
 
 									<Button variant="contained" color="error" onClick={ onClearForm }> Cancelar </Button>
 												
