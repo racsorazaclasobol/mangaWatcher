@@ -1,6 +1,6 @@
 
 import Modal from 'react-modal'
-import { Button, FormControl, Grid, InputLabel, MenuItem, Select } from '@mui/material';
+import { Button, FormControl, Grid, InputLabel, MenuItem, Select, Typography } from '@mui/material';
 
 import { useForm } from '../../../hooks';
 import { useMangaStore, useUIStore } from '../../hooks/';
@@ -34,8 +34,8 @@ const initialForm = {
 
 export const ModalChapterSelector = () => {
 
-    const { isOpenChapterModal, closeChapterModal, navigate }   = useUIStore();
-    const { activeManga, startObtenerChapterPorUID }            = useMangaStore();
+    const { isOpenChapterModal, closeChapterModal }   = useUIStore();
+    const { activeManga, startObtenerChapterPorUID }  = useMangaStore();
 
 
     const { chapter, onInputChange, onResetForm }    = useForm( initialForm );
@@ -89,8 +89,8 @@ export const ModalChapterSelector = () => {
                         >
                             <MenuItem value={ 0 } disabled > Seleccione... </MenuItem>
                             {
-                                listaCaps.map( ({ capitulo, uid }) => ( 
-                                    <MenuItem key={ uid } value={ uid } > { capitulo } </MenuItem>
+                                listaCaps.map( ({ uid, capitulo, titulo }) => ( 
+                                    <MenuItem key={ uid } value={ uid }  > <Typography noWrap > { capitulo } - { titulo } </Typography> </MenuItem>
                                 ) )
                             }
 
