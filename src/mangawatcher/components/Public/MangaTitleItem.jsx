@@ -13,28 +13,10 @@ export const MangaTitleItem = () => {
 
     return (
         <>
-            <Grid container>
-                <Grid item sx={{ display: { xs: 'block', sm: 'none' } }} >
-                    <h1>xs</h1> 
-                </Grid>
-                <Grid item sx={{ display: { xs: 'none', sm: 'block', md: 'none' } }} >
-                    <h1>sm</h1> 
-                </Grid>
-                <Grid item sx={{ display: { xs: 'none', md: 'block', lg: 'none' } }} >
-                    <h1>md</h1> 
-                </Grid>
-                <Grid item sx={{ display: { xs: 'none', lg: 'block', xl: 'none' } }} >
-                    <h1>lg</h1> 
-                </Grid>
-                <Grid item sx={{ display: { xs: 'none', xl: 'block' } }} >
-                    <h1>xl</h1> 
-                </Grid>
-            </Grid>
-            <hr />
             {
                 mangas.map( ({ uid, nombre, portada, autor }) => (
                     <>
-                        <Grid key={ uid } item xs={ 12 } sm={ 6 } md={ 4 } xl={ 3.5 } onClick={ () => onOpenManga( uid, nombre ) } className="pointer" >
+                        <Grid key={ uid } item xs={ 3.5 } onClick={ () => onOpenManga( uid, nombre ) } className="pointer" >
                             <Card sx={{ display: 'flex', height: '200px', justifyContent: 'flex-start' }}>
                                 <CardMedia
                                     component="img"
