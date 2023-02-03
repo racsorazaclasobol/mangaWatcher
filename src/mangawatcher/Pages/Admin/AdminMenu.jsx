@@ -1,16 +1,21 @@
-import { Grid, Typography, Box, Card, CardMedia, CardContent, Divider } from "@mui/material"
 import { Link } from "react-router-dom"
+import { Grid, Typography, Box, Card, CardMedia, CardContent, Divider } from "@mui/material"
+
 import { MangaLayout } from "../../layout/MangaLayout"
+import { Breakpoints } from '../../components/Public/Breakpoints'
 
 export const AdminMenu = () => {
 
     return (
         <>
             <MangaLayout>
-                <Grid container height={'calc(100vh - 230px)'} p={ 5 } >
-                    <Grid container spacing={ 2 } justifyContent='center'>
+                <Grid container minheight={'calc(100vh - 230px)'}>
 
-                        <Grid item xs={ 4 } >
+                    <Breakpoints />
+                    
+                    <Grid container spacing={ 2 } justifyContent='center' mb={ 5 }>
+
+                        <Grid item xs={ 11 } sm={ 8 } md={ 5 } xl={ 4 }>
                             <Card sx={{ display: 'flex', height: '265px' }}>
                                 <CardMedia
                                     component="img"
@@ -43,7 +48,7 @@ export const AdminMenu = () => {
                             </Card>
                         </Grid>
 
-                        <Grid item xs={ 4 }>
+                        <Grid item xs={ 11 } sm={ 8 } md={ 5 } xl={ 4 }>
                             <Card sx={{ display: 'flex', height: '265px', justifyContent: 'space-between' }}>
                                 <Box sx={{ display: 'flex', flexDirection: 'column' }}>
                                     <CardContent sx={{ flex: '1 0 auto' }} style={{ marginRight:'19px' }}>
