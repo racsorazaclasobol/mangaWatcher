@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 
+import Swal from 'sweetalert2';
+import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import { LogoutOutlined } from "@mui/icons-material";
+import { Button, Divider, FormControl, FormHelperText, Grid, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
+
 import { useForm } from "../../../hooks"
 import { useUIStore, useAdminStore, useAuthStrore } from "../../hooks";
-import { CardImagePreview, ChapterImagePreview, SimboloCargando } from "../../components";
+import { CardImagePreview, ChapterImagePreview, SimboloCargando, Breakpoints } from "../../components";
 
-import { Button, Divider, FormControl, FormHelperText, Grid, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
-import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-
-import Swal from 'sweetalert2';
-import { LogoutOutlined } from "@mui/icons-material";
 
 const initialForm = {
 	manga: '',
@@ -204,9 +204,9 @@ export const AdminAddChapter = () => {
 
 					<Grid container direction='row' justifyContent='center' sx={{ backgroundColor: `${ styleMode }.dark` }} minHeight='100vh' pb={ 5 } >
 						
-						<Grid item xs={10} sx={{ backgroundColor: `${ styleMode }.gray.claro` }} p={5} >
-							<Grid container>
-								
+						<Grid item xs={ 12 } md={ 10 } lg={ 10 } sx={{ backgroundColor: `${ styleMode }.gray.claro` }} p={5} >
+							<Grid container spacing={ 2 }>
+								<Breakpoints />
 								<Grid item xs={ 11 }  >
 									<Typography variant="h4">
 										Subir Capitulos
@@ -230,7 +230,7 @@ export const AdminAddChapter = () => {
 									<Divider />
 								</Grid>
 
-								<Grid item xs={ 4 } mr={ 3 }>
+								<Grid item xs={ 12 } sm={ 7 } lg={ 5 }>
 									<FormControl fullWidth>
 										<InputLabel id="animeTitleLabel">Titulo del manga</InputLabel>
 										<Select
@@ -254,7 +254,7 @@ export const AdminAddChapter = () => {
 									</FormControl>
 								</Grid>
 
-								<Grid item xs={2} mr={3}>
+								<Grid item xs={ 12 } sm={ 5 } lg={ 2 }>
 									<TextField
 										type="number"
 										fullWidth
@@ -269,7 +269,7 @@ export const AdminAddChapter = () => {
 									
 								</Grid>
 
-								<Grid item xs={5}>
+								<Grid item xs={ 12 } lg={ 5 }>
 									<TextField
 										type="text"
 										fullWidth
@@ -299,7 +299,7 @@ export const AdminAddChapter = () => {
 									: ( <></> )
 								}
 
-								<Grid item xs={ 6 } mb={ 3 } mt={ 5 }>
+								<Grid item xs={ 12 } md={ 9 } >
 									<Typography variant="h6">
 										Imagenes de Agradecimiento
 									</Typography>								
@@ -307,7 +307,7 @@ export const AdminAddChapter = () => {
 								</Grid>
 
 
-								<Grid item xs={ 3 } ml={ 3 } mt={ 5 } >
+								<Grid item xs={ 12 } md={ 3 }  >
 									<input
 										type="file"
 										accept=".webp" 
@@ -321,7 +321,7 @@ export const AdminAddChapter = () => {
 										variant="outlined"
 										onClick={ () => thanksInputRef.current.click() }
 									>
-										<CloudUploadIcon sx={{ mr:2 }} />
+										<CloudUploadIcon sx={{ mr: 2 }} />
 										Subir Imagenes
 									</Button>
 								</Grid>
@@ -342,14 +342,14 @@ export const AdminAddChapter = () => {
 
 								{/* INICIO IMAGENES DE PORTADA */}
 
-								<Grid item xs={ 6 } mb={ 3 } mt={ 5 }>
+								<Grid item xs={ 12 } md={ 9 }>
 									<Typography variant="h6">
 										Imagenes de Portada
 									</Typography>								
 									<Divider />
 								</Grid>
 
-								<Grid item xs={ 3 } ml={ 3 } mt={ 5 } >
+								<Grid item xs={ 12 } md={ 3 } >
 									<input
 										type="file"
 										accept=".webp" 
@@ -368,7 +368,7 @@ export const AdminAddChapter = () => {
 									</Button>
 								</Grid>
 
-								<Grid item xs={ 12 } >		
+								<Grid item xs={ 12 }>		
 									<Grid container spacing={ 2 }>							
 										{
 											coverTitlesLists.map( coverFile => (
@@ -384,14 +384,14 @@ export const AdminAddChapter = () => {
 
 								{/* INICIO IMAGENES DEL CAPITULO */}
 
-								<Grid item xs={ 6 } mb={ 3 } mt={ 5 }>
+								<Grid item xs={ 12 } md={ 9 }>
 									<Typography variant="h6">
 										Imagenes del Capitulo
 									</Typography>								
 									<Divider />
 								</Grid>
 
-								<Grid item xs={ 3 } ml={ 3 } mt={ 5 } >
+								<Grid item xs={ 12 } md={ 3 }>
 									<input
 										type="file"
 										accept=".webp" 
@@ -426,14 +426,14 @@ export const AdminAddChapter = () => {
 
 								{/* INICIO IMAGENES DE EXTRAS */}
 
-								<Grid item xs={ 6 } mb={ 3 } mt={ 5 }>
+								<Grid item xs={ 12 } md={ 9 }>
 									<Typography variant="h6">
 										Imagenes de Extras
 									</Typography>								
 									<Divider />
 								</Grid>
 
-								<Grid item xs={ 3 } ml={ 3 } mt={ 5 } >
+								<Grid item xs={ 12 } md={ 3 }>
 									<input
 										type="file"
 										accept=".webp" 
@@ -452,7 +452,7 @@ export const AdminAddChapter = () => {
 									</Button>
 								</Grid>
 
-								<Grid item xs={ 10 } >		
+								<Grid item xs={ 12 } >		
 									<Grid container spacing={ 2 }>							
 										{
 											extrasTitlesList.map( extraFile => (
