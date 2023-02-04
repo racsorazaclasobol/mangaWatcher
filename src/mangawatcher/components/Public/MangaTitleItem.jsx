@@ -1,6 +1,5 @@
 import { Grid, Card, CardContent, CardMedia, Typography, Box, Divider } from "@mui/material";
 import { useMangaStore, useUIStore } from "../../hooks";
-import { Breakpoints } from "./Breakpoints";
 
 export const MangaTitleItem = () => {
 
@@ -13,7 +12,6 @@ export const MangaTitleItem = () => {
 
     return (
         <>
-            <Breakpoints />
             {
                 mangas.map( ( { uid, nombre, portada, autor, capitulo, titulo }, index, array ) => (
                     <Grid container key={ index } item xs={ 12 } sm={ 10 } md={ 6 } lg={ 4 } xl={ 3.5 } onClick={ () => onOpenManga( uid, nombre ) } className="pointer" >
