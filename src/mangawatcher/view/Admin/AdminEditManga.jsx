@@ -4,8 +4,9 @@ import { LogoutOutlined } from "@mui/icons-material";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 import { useForm } from "../../../hooks"
-import { useAdminStore, useUIStore } from "../../hooks";
-import { CardImagePreview } from "../../components";
+import { useAdminStore, useAuthStrore, useUIStore } from "../../hooks";
+import { CardImagePreview, DemoUserButton } from "../../components";
+import { Link } from "react-router-dom";
 
 let initialForm = {
     uid: '',
@@ -40,6 +41,8 @@ export const AdminEditManga = () => {
 
     const portadaRef = useRef();
 	const { styleMode } = useUIStore();
+	const { user } = useAuthStrore();
+
 
     const [previewPortada, setPreviewPortada] = useState();
     const [mangaSelected, setMangaSelected] = useState( 0 );
@@ -246,8 +249,14 @@ export const AdminEditManga = () => {
 									<Divider />
 								</Grid>
 
-									<Button variant="contained" onClick={ onSaveManga } > Guardar </Button>
-									<Button variant="contained" color="error"> Cancelar </Button>
+                                {
+                                    ( user.uid === '1lnvyT41idVffnkoQqlW0NivKj33' )
+                                    ? ( <DemoUserButton /> )
+                                    : ( <Button variant="contained" onClick={ onSaveManga } > Guardar </Button> )
+                                }
+                                <Link to='/admin'>
+                                    <Button variant="contained" color="error" > Cancelar </Button>
+                                </Link>
 												
 							</Grid>
 						</Grid>

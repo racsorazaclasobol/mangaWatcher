@@ -7,7 +7,8 @@ import { Button, Divider, FormControl, FormHelperText, Grid, IconButton, InputLa
 
 import { useForm } from "../../../hooks"
 import { useUIStore, useAdminStore, useAuthStrore } from "../../hooks";
-import { ChapterImagePreview, SimboloCargando } from "../../components";
+import { ChapterImagePreview, DemoUserButton, SimboloCargando } from "../../components";
+import { Link } from "react-router-dom";
 
 
 const initialForm = {
@@ -144,12 +145,6 @@ export const AdminAddChapter = () => {
 		}
 
 		startSaveChapter( allImages );
-
-	}
-
-	const alertDemoMessage = () => {
-
-		alert('Cuenta Demo - No se permite guardar');
 
 	}
 
@@ -476,11 +471,13 @@ export const AdminAddChapter = () => {
 
 									{
 										( user.uid === '1lnvyT41idVffnkoQqlW0NivKj33' )
-										? ( <Button variant="contained" onClick={ alertDemoMessage }> Guardar </Button> )
+										? ( <DemoUserButton /> )
 										: ( <Button variant="contained" onClick={ onSaveManga }> Guardar </Button> )
 									}
 
-									<Button variant="contained" color="error" onClick={ onClearForm }> Cancelar </Button>
+									<Link to='/admin'>
+										<Button variant="contained" color="error" > Cancelar </Button>
+									</Link>
 												
 							</Grid>
 						</Grid>

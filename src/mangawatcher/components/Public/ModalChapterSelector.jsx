@@ -69,43 +69,54 @@ export const ModalChapterSelector = () => {
                 shouldCloseOnEsc = { true }
                 shouldCloseOnOverlayClick = { true }
             >
-                <Grid container textAlign='center'>
-                    <div className='container' style={{ textAlign:'center' }}>
-                        <h4>Seleccione un capítulo</h4>
-                    </div>
-                </Grid>
-                <Grid container bgcolor='white' p={5}>
-                    <FormControl fullWidth>
-                        <InputLabel id='chapterLabel'> Capítulo </InputLabel>
-                        
-                        <Select 
-                            fullWidth
-                            labelId='chapterLabel'
-                            value={ chapter }
-                            name='chapter'
-                            label=" Capítulo"
-                            onChange={ onInputChange }
-                        >
-                            <MenuItem value={ 0 } disabled > Seleccione... </MenuItem>
+                <Grid container justifyContent='center' p={ 2 } spacing={ 5 }>
+                    <Grid item textAlign='center'>
+                        <Typography variant='h5'>
+                            Seleccione un capítulo
+                        </Typography>
+                    </Grid>
+
+                    <Grid item bgcolor='white'>
+                        <FormControl fullWidth>
+                            <InputLabel id='chapterLabel'> Capítulo </InputLabel>
+                            
+                            <Select 
+                                fullWidth
+                                labelId='chapterLabel'
+                                value={ chapter }
+                                name='chapter'
+                                label=" Capítulo"
+                                onChange={ onInputChange }
+                            >
+                                <MenuItem value={ 0 } disabled > Seleccione... </MenuItem>
+                                {
+                                    listaCaps.map( ({ uid, capitulo, titulo }) => ( 
+                                        <MenuItem key={ uid } value={ uid }  > <Typography noWrap > { capitulo } - { titulo } </Typography> </MenuItem>
+                                    ) )
+                                }
+
+                            </Select>
+
+                        </FormControl>
+
+                        <Button 
+                            fullWidth 
+                            variant='contained' 
+                            sx={{ marginTop: '30px' }}
+                            onClick={ onSelectChapter }
+                            disabled={ ( chapter === 0 ) ? true : false } > 
                             {
-                                listaCaps.map( ({ uid, capitulo, titulo }) => ( 
-                                    <MenuItem key={ uid } value={ uid }  > <Typography noWrap > { capitulo } - { titulo } </Typography> </MenuItem>
-                                ) )
+                                ( chapter === 0 )
+                                ? ( <a> Seleccione </a> )
+                                : ( <a> ¡ A disfrutar ! </a> )
                             }
-
-                        </Select>
-
-                    </FormControl>
-
-                    <Button 
-                        fullWidth 
-                        variant='contained' 
-                        sx={{ marginTop: '30px' }}
-                        onClick={ onSelectChapter }
-                        disabled={ ( chapter === 0 ) ? true : false }
-                    > Seleccionar </Button>
+                        </Button>
 
                 </Grid>
+
+                </Grid>
+                
+                
             </Modal>
     )
 }
