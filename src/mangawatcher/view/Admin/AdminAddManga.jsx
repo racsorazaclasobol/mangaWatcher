@@ -4,8 +4,9 @@ import { LogoutOutlined } from "@mui/icons-material";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 import { useForm } from "../../../hooks"
-import { useAdminStore, useUIStore } from "../../hooks";
-import { CardImagePreview } from "../../components";
+import { useAdminStore, useAuthStrore, useUIStore } from "../../hooks";
+import { CardImagePreview, DemoUserButton } from "../../components";
+import { Link } from "react-router-dom";
 
 const initialForm = {
     nombre: '',
@@ -18,7 +19,8 @@ export const AdminAddManga = () => {
     const portadaRef = useRef();
 	const { styleMode } = useUIStore();
 	const { startSaveManga } = useAdminStore();
-    const { nombre, autor, formState, onInputChange, onResetForm, onInputCustomChange } = useForm( initialForm );
+	const { user } = useAuthStrore();
+    const { nombre, autor, formState, onInputChange, onInputCustomChange } = useForm( initialForm );
     const [previewPortada, setPreviewPortada] = useState();
 
     const onSaveManga = () => {
@@ -147,8 +149,15 @@ export const AdminAddManga = () => {
 									<Divider />
 								</Grid>
 
-									<Button variant="contained" onClick={ onSaveManga } > Agregar </Button>
-									<Button variant="contained" color="error"> Cancelar </Button>
+									{
+										( user.uid === '1lnvyT41idVffnkoQqlW0NivKj33' )
+										? ( <DemoUserButton /> )
+										: ( <Button variant="contained" onClick={ onSaveManga } > Agregar </Button> )
+									}
+									
+									<Link to='/admin'>
+										<Button variant="contained" color="error" > Cancelar </Button>
+									</Link>
 												
 							</Grid>
 						</Grid>
