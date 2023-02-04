@@ -22,7 +22,19 @@ export const useMangaStore = () => {
 
             const { data } = await mangaApi.get( '/mangas' );
             
-            dispatch( onLoadMangas( data ) );
+            let mangas = [];
+
+            for (const manga of data) {
+                    
+                const { data } = await mangaApi.get( `/chapters/titleLast/${ manga.uid }` );
+                const { uid, ...tempData } = data;
+                const tempManga = { ...manga, ...tempData };
+
+                mangas.push( tempManga );
+
+            }
+            
+            dispatch( onLoadMangas( mangas ) );
 
         } catch (error) {
             console.log( error );
