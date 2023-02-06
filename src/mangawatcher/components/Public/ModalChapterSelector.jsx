@@ -12,7 +12,6 @@ const customStyles = {
         right: 'auto',
         bottom: 'auto',
         marginRight: '0%',
-        transform: 'translate(0%, -50%)',
     },
 };
 
@@ -70,13 +69,13 @@ export const ModalChapterSelector = () => {
                 shouldCloseOnOverlayClick = { true }
             >
                 <Grid container justifyContent='center' p={ 2 } spacing={ 5 }>
-                    <Grid item textAlign='center'>
+                    <Grid xs={ 12 } item textAlign='center'>
                         <Typography variant='h5'>
                             Seleccione un capítulo
                         </Typography>
                     </Grid>
 
-                    <Grid item bgcolor='white'>
+                    <Grid xs={ 12 } item bgcolor='white'>
                         <FormControl fullWidth>
                             <InputLabel id='chapterLabel'> Capítulo </InputLabel>
                             
