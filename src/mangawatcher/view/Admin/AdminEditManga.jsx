@@ -5,7 +5,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 import { useForm } from "../../../hooks"
 import { useAdminStore, useAuthStrore, useUIStore } from "../../hooks";
-import { CardImagePreview, DemoUserButton } from "../../components";
+import { CardImagePreview, DemoUserButton, HeaderManagers } from "../../components";
 import { Link } from "react-router-dom";
 
 let initialForm = {
@@ -129,21 +129,7 @@ export const AdminEditManga = () => {
 						<Grid item xs={ 12 } md={ 10 } lg={ 9 } p={ 5 } sx={{ backgroundColor: `${ styleMode }.gray.claro` }} >
                             <Grid container spacing={ 2 }>
 								
-								<Grid item xs={ 11 }  >
-									<Typography variant="h4">
-										Editar Manga
-									</Typography>
-								</Grid>
-
-								<Grid item xs={ 1 }  >
-									<IconButton color="error" >
-										<LogoutOutlined sx={{ fontSize:'30px' }}/> 
-									</IconButton>
-								</Grid>
-
-								<Grid item xs={ 12 } mb={ 1 }>
-									<Divider />
-								</Grid>
+								<HeaderManagers titulo="Editar Manga" />
 
                                 <Grid item xs={ 12 }>
 									<Typography variant="h6">

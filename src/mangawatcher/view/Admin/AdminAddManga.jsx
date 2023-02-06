@@ -5,7 +5,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 
 import { useForm } from "../../../hooks"
 import { useAdminStore, useAuthStrore, useUIStore } from "../../hooks";
-import { CardImagePreview, DemoUserButton } from "../../components";
+import { CardImagePreview, DemoUserButton, HeaderManagers } from "../../components";
 import { Link } from "react-router-dom";
 
 const initialForm = {
@@ -61,110 +61,96 @@ export const AdminAddManga = () => {
         
         <Grid container minHeight='100vh' direction='column'  >	
 
-					<Grid container direction='row' justifyContent='center' minHeight='100vh' pb={ 5 } sx={{ backgroundColor: `${ styleMode }.dark` }} >
-						<Grid item xs={ 12 } md={ 10 } lg={ 9 } p={ 5 } sx={{ backgroundColor: `${ styleMode }.gray.claro` }} >
-							<Grid container spacing={ 2 }>
-								
-								<Grid item xs={ 11 }  >
-									<Typography variant="h4">
-										Añadir Manga
-									</Typography>
-								</Grid>
+			<Grid container direction='row' justifyContent='center' minHeight='100vh' pb={ 5 } sx={{ backgroundColor: `${ styleMode }.dark` }} >
+				<Grid item xs={ 12 } md={ 10 } lg={ 9 } p={ 5 } sx={{ backgroundColor: `${ styleMode }.gray.claro` }} >
+					<Grid container spacing={ 2 }>
+						
+						<HeaderManagers titulo="Añadir Manga" />
 
-								<Grid item xs={ 1 }  >
-									<IconButton color="error" >
-										<LogoutOutlined sx={{ fontSize:'30px' }}/> 
-									</IconButton>
-								</Grid>
-
-								<Grid item xs={ 12 } mb={ 5 }>
-									<Divider />
-								</Grid>
-
-								<Grid item xs={ 12 } mb={ 3 }>
-									<Typography variant="h6">
-										Informacion del Manga
-									</Typography>								
-									<Divider />
-								</Grid>
-
-								<Grid item xs={ 12 } lg={ 6 } >
-									<TextField
-										type="text"
-										fullWidth
-                                        label="Manga"
-										placeholder="Ingrese el nombre del manga"
-										name="nombre"
-                                        value={ nombre }
-                                        onChange={ onInputChange }
-									/>
-									
-								</Grid>
-
-								<Grid item xs={ 12 } lg={ 6 } >
-									<TextField
-										type="text"
-										fullWidth
-										placeholder="Ingrese el nombre del Autor"
-										label="Autor"
-										name="autor"
-                                        value={ autor }
-                                        onChange={ onInputChange }
-									/>
-									
-								</Grid>
-
-                                <Grid item xs={ 12 } mt={ 3 }>
-                                    <input
-										type="file"
-										accept="image/*.webp" 
-										multiple
-										ref={ portadaRef }
-										onChange={ onPortadaChange }
-										style={{ display:'none' }}
-									/>
-									
-									<Button
-										variant="outlined"
-										onClick={ () => portadaRef.current.click() }
-									>
-										<CloudUploadIcon sx={{ mr:2 }} />
-										Subir Portada
-									</Button>
-								</Grid>
-
-                                <Grid item xs={ 12 } mt={ 3 }>
-                                    {
-                                        ( previewPortada )
-                                        ? ( <CardImagePreview  image={ previewPortada.image } title={ nombre } type={ '' } autor={ autor } /> )
-                                        : ( <></> )
-                                    }
-								</Grid>
-								
-							</Grid>
-
-							<Grid container justifyContent="space-between">
-									
-								<Grid item xs={ 12 } mt={ 5 } mb={ 5 }>
-									<Divider />
-								</Grid>
-
-									{
-										( user.uid === '1lnvyT41idVffnkoQqlW0NivKj33' )
-										? ( <DemoUserButton /> )
-										: ( <Button variant="contained" onClick={ onSaveManga } > Agregar </Button> )
-									}
-									
-									<Link to='/admin'>
-										<Button variant="contained" color="error" > Cancelar </Button>
-									</Link>
-												
-							</Grid>
+						<Grid item xs={ 12 } mb={ 3 }>
+							<Typography variant="h6">
+								Informacion del Manga
+							</Typography>								
+							<Divider />
 						</Grid>
 
+						<Grid item xs={ 12 } lg={ 6 } >
+							<TextField
+								type="text"
+								fullWidth
+								label="Manga"
+								placeholder="Ingrese el nombre del manga"
+								name="nombre"
+								value={ nombre }
+								onChange={ onInputChange }
+							/>
+							
+						</Grid>
+
+						<Grid item xs={ 12 } lg={ 6 } >
+							<TextField
+								type="text"
+								fullWidth
+								placeholder="Ingrese el nombre del Autor"
+								label="Autor"
+								name="autor"
+								value={ autor }
+								onChange={ onInputChange }
+							/>
+							
+						</Grid>
+
+						<Grid item xs={ 12 } mt={ 3 }>
+							<input
+								type="file"
+								accept="image/*.webp" 
+								multiple
+								ref={ portadaRef }
+								onChange={ onPortadaChange }
+								style={{ display:'none' }}
+							/>
+							
+							<Button
+								variant="outlined"
+								onClick={ () => portadaRef.current.click() }
+							>
+								<CloudUploadIcon sx={{ mr:2 }} />
+								Subir Portada
+							</Button>
+						</Grid>
+
+						<Grid item xs={ 12 } mt={ 3 }>
+							{
+								( previewPortada )
+								? ( <CardImagePreview  image={ previewPortada.image } title={ nombre } type={ '' } autor={ autor } /> )
+								: ( <></> )
+							}
+						</Grid>
+						
 					</Grid>
-					
+
+					<Grid container justifyContent="space-between">
+							
+						<Grid item xs={ 12 } mt={ 5 } mb={ 5 }>
+							<Divider />
+						</Grid>
+
+							{
+								( user.uid === '1lnvyT41idVffnkoQqlW0NivKj33' )
+								? ( <DemoUserButton /> )
+								: ( <Button variant="contained" onClick={ onSaveManga } > Agregar </Button> )
+							}
+							
+							<Link to='/admin'>
+								<Button variant="contained" color="error" > Cancelar </Button>
+							</Link>
+										
+					</Grid>
 				</Grid>
+
+			</Grid>
+			
+		</Grid>
 
     )
 }

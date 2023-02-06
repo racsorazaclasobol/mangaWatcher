@@ -1,14 +1,13 @@
+import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 
 import Swal from 'sweetalert2';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
-import { LogoutOutlined } from "@mui/icons-material";
-import { Button, Divider, FormControl, FormHelperText, Grid, IconButton, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
+import { Button, Divider, FormControl, FormHelperText, Grid, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material"
 
 import { useForm } from "../../../hooks"
 import { useUIStore, useAdminStore, useAuthStrore } from "../../hooks";
-import { ChapterImagePreview, DemoUserButton, SimboloCargando } from "../../components";
-import { Link } from "react-router-dom";
+import { ChapterImagePreview, DemoUserButton, SimboloCargando, HeaderManagers } from "../../components";
 
 
 const initialForm = {
@@ -44,7 +43,7 @@ export const AdminAddChapter = () => {
 
 		
 	const { styleMode } = useUIStore();
-	const { startLogout, user } = useAuthStrore();
+	const { user } = useAuthStrore();
 	
 	const { 
 			formState, manga, capitulo, titulo, isFormValid, mangaValid, capituloValid, tituloValid, 
@@ -148,10 +147,6 @@ export const AdminAddChapter = () => {
 
 	}
 
-	const onLogout = () => {
-		startLogout();
-	}
-
 	useEffect(() => {
 		startStoreNuevoCapitulo( formState );
 	}, [formState])
@@ -200,25 +195,12 @@ export const AdminAddChapter = () => {
 					<Grid container direction='row' justifyContent='center' sx={{ backgroundColor: `${ styleMode }.dark` }} minHeight='100vh' pb={ 5 } >
 						
 						<Grid item xs={ 12 } md={ 10 } lg={ 10 } sx={{ backgroundColor: `${ styleMode }.gray.claro` }} p={5} >
+							
 							<Grid container spacing={ 2 }>
 
-								<Grid item xs={ 11 }  >
-									<Typography variant="h4">
-										Subir Capitulos
-									</Typography>
-								</Grid>
+								<HeaderManagers titulo="Agregar Chapter" />
 
-								<Grid item xs={ 1 }  >
-									<IconButton color="error" onClick={ onLogout } >
-										<LogoutOutlined sx={{ fontSize:'30px' }}/> 
-									</IconButton>
-								</Grid>
-
-								<Grid item xs={ 12 } mb={ 5 }>
-									<Divider />
-								</Grid>
-
-								<Grid item xs={ 12 } mb={ 3 }>
+								<Grid item xs={ 12 }  mb={ 5 }>
 									<Typography variant="h5">
 										Informacion del Manga
 									</Typography>								
