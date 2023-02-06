@@ -10,14 +10,14 @@ import { MangaRoutes } from "../mangawatcher/routes/MangaRoutes";
 export const AppRouter = () => {
 
 	const { startObtenerTitulosMangas } = useMangaStore();
-	const { status, startCheckingAuth } = useAuthStrore();
+	const { status, startCheckAuthToken } = useAuthStrore();
 
 	useEffect(() => {
 		startObtenerTitulosMangas();
 	}, []);
 
 	useEffect( () => {
-		startCheckingAuth();
+		startCheckAuthToken();
 	}, [] );
 
 	if( status === 'checking' ){
@@ -30,9 +30,9 @@ export const AppRouter = () => {
 			<Routes>
 				
 				{
-					( status === "authenticated" )
-					? <Route path="/admin" element={ <AdminMenu /> } /> //Ruta Privada
-					: <Route path="/admin" element={ <LoginPage /> } />
+					( status === "non-authenticated" )
+					? <Route path="/admin/*" element={ <LoginPage /> } />
+					: <Route path="/admin" element={ <AdminMenu /> } /> 
 				}
 
 				<Route path="/*" element={ <MangaRoutes /> }/> 

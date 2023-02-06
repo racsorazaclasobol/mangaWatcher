@@ -1,8 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Divider, Grid, TextField, Typography } from "@mui/material"
 import { useForm } from "../../hooks";
 import { useAuthStrore, useUIStore } from "../../mangawatcher/hooks"
 import { MangaLayout } from "../../mangawatcher/layout/MangaLayout"
+import Swal from "sweetalert2";
 
 const loginFormField = {
     loginEmail: '',
@@ -17,19 +18,27 @@ const formValidation = {
 export const LoginPage = () => {
 
     const { styleMode } = useUIStore();
-    const { status, startLoginWithEmailPassword } = useAuthStrore();
-    const { formState, loginEmail, loginPassword, loginEmailValid, loginPasswordValid, isFormValid, onInputChange } = useForm(loginFormField, formValidation);
+    const { errorMessage, startLoginWithEmailPassword } = useAuthStrore();
+    const { loginEmail, loginPassword, loginEmailValid, loginPasswordValid, isFormValid, onInputChange } = useForm(loginFormField, formValidation);
     
     const [formSubmitted, setFormSubmitted] = useState(false)
 
-    const onLogin = ( e ) => {
-        e.preventDefault();
-        setFormSubmitted( true );
+    const onLogin = () => {
 
-        startLoginWithEmailPassword( formState );
+        setFormSubmitted( true );
+        startLoginWithEmailPassword({ correo: loginEmail, password: loginPassword });
 
     }
 
+    useEffect(() => {
+
+        console.log(errorMessage)
+        
+		if( errorMessage !== undefined ){
+			Swal.fire('Error en la autenticación', errorMessage, 'error')
+		}
+	
+	}, [errorMessage])
 
     return (
         <>
@@ -42,34 +51,30 @@ export const LoginPage = () => {
                         <Typography variant="h5"> Iniciar Sesión </Typography>
                         <Divider sx={{ marginBottom: '16px', marginTop: '16px' }} />
 
-                        <form onSubmit={ onLogin }>
-                            
-                            <TextField
-                                fullWidth
-                                type="email"
-                                label="Ingrese su correo"
-                                name="loginEmail"
-                                value={ loginEmail }
-                                onChange={ onInputChange }
-                                error={ !!loginEmailValid && formSubmitted }
-                                helperText={ ( formSubmitted && !isFormValid ) ? loginEmailValid : '' }
-                            />
+                        <TextField
+                            fullWidth
+                            type="email"
+                            label="Ingrese su correo"
+                            name="loginEmail"
+                            value={ loginEmail }
+                            onChange={ onInputChange }
+                            error={ !!loginEmailValid && formSubmitted }
+                            helperText={ ( formSubmitted && !isFormValid ) ? loginEmailValid : '' }
+                        />
 
-                            <TextField
-                                fullWidth
-                                sx={{ marginTop: '10px', marginBottom: '36px' }}
-                                type="password"
-                                label="Ingrese su contraseña"
-                                name="loginPassword"
-                                value={ loginPassword }
-                                onChange={ onInputChange }
-                                error={ !!loginPasswordValid && formSubmitted }
-                                helperText={ ( formSubmitted && !isFormValid ) ? loginPasswordValid : '' }
-                            />
+                        <TextField
+                            fullWidth
+                            sx={{ marginTop: '10px', marginBottom: '36px' }}
+                            type="password"
+                            label="Ingrese su contraseña"
+                            name="loginPassword"
+                            value={ loginPassword }
+                            onChange={ onInputChange }
+                            error={ !!loginPasswordValid && formSubmitted }
+                            helperText={ ( formSubmitted && !isFormValid ) ? loginPasswordValid : '' }
+                        />
 
-                            <Button fullWidth variant="contained" type="submit" > Iniciar Sesion </Button>
-
-                        </form>
+                        <Button fullWidth variant="contained" onClick={ onLogin }> Iniciar Sesion </Button>
                                                 
                     </Grid>
 

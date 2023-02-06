@@ -1,6 +1,7 @@
 import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux"
 import Swal from "sweetalert2";
+import mangaApi from "../../api/mangaApi";
 import { FirebaseAuth } from "../../firebase/config";
 import { onChecking, onClearErrorMessage, onLogin, onLogout } from "../../store/auth/authSlice";
 
@@ -10,35 +11,51 @@ const errorLoginMessages = ['auth/wrong-password', 'auth/user-not-found'];
 export const useAuthStrore = () => {
     
     const dispatch = useDispatch();
-    const { status, user } = useSelector( state => state.auth );
+    const { status, user, errorMessage } = useSelector( state => state.auth );
 
 
-    const startLoginWithEmailPassword = async({ loginEmail = '', loginPassword = '' }) => {
+    const startLoginWithEmailPassword = async({ correo, password }) => {
 
         dispatch( onChecking() );
 
         try {
-            const { user } = await signInWithEmailAndPassword( FirebaseAuth, loginEmail, loginPassword );
-            const { accessToken, displayName, email, uid } = user;
 
-            localStorage.setItem( 'token', accessToken );
+            const { data } = await mangaApi.post( '/auth/login', { correo, password } );
+            
+            const { usuario, token } = data;
 
-            const userToSave = {
-                uid: uid,
-                name: displayName,
-            }
+            localStorage.setItem( 'token', data.token );
+            localStorage.setItem( 'token-init-date', new Date().getDate() );
 
-            dispatch( onLogin( userToSave) );
-
+            dispatch( onLogin({ name: usuario.nombre, uid: usuario.uid }) );
             
         } catch (error) {
-            console.log(error.code)
-            const errorMessage = ( errorLoginMessages.some( elem => elem === error.code ) ) ? 'Credenciales no validas' : '';
-            Swal.fire( 'Error de autenticación', errorMessage, 'error' );
-            dispatch( onLogout( error.code ) );
+
+            dispatch( onLogout( error.response.data.msg ) );
+        }
+    }
+
+    const startCheckAuthToken = async() => {
+
+        const token = localStorage.getItem('token');
+
+        if ( !token ) {
+            dispatch( onLogout() );
         }
 
+        try {
 
+            const { data } = await mangaApi.get( '/auth/renew' );
+
+            localStorage.setItem( 'token', data.token );
+            localStorage.setItem( 'token-init-date', new Date().getDate() );
+
+            dispatch( onLogin( { name: data.nombre, uid: data.uid } ) );
+            
+        } catch (error) {
+            localStorage.clear();
+            dispatch( onLogout() );
+        }
     }
 
     const startCheckingAuth = () => {
@@ -64,13 +81,9 @@ export const useAuthStrore = () => {
     }
 
     const startLogout = async () => {
-
-        dispatch( onChecking() );
-
-        await FirebaseAuth.signOut();
+        localStorage.clear();
 
         dispatch( onLogout() );
-        dispatch( onClearErrorMessage() );
 
     }
     
@@ -80,10 +93,12 @@ export const useAuthStrore = () => {
         //Objetos y Propiedades
         status,
         user,
+        errorMessage,
 
         //Funciones y Metodos
         startLoginWithEmailPassword,
         startCheckingAuth,
+        startCheckAuthToken,
         startLogout
     }
 }
