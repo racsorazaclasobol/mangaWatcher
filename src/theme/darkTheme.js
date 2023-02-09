@@ -5,7 +5,7 @@ export const darkTheme = createTheme({
     palette: {
 
         white:{
-            primary:'#1CA3AA',
+            primary:'#319AB7',
             secondary: '#EDEDED',
             normalText: '#000000',
             divider: grey[500],
