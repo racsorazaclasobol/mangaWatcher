@@ -1,8 +1,5 @@
-import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { useDispatch, useSelector } from "react-redux"
-import Swal from "sweetalert2";
 import mangaApi from "../../api/mangaApi";
-import { FirebaseAuth } from "../../firebase/config";
 import { onChecking, onClearErrorMessage, onLogin, onLogout } from "../../store/auth/authSlice";
 
 const errorLoginMessages = ['auth/wrong-password', 'auth/user-not-found'];
@@ -40,7 +37,7 @@ export const useAuthStrore = () => {
         const token = localStorage.getItem('token');
 
         if ( !token ) {
-            dispatch( onLogout() );
+            return dispatch( onLogout() );
         }
 
         try {
@@ -58,36 +55,12 @@ export const useAuthStrore = () => {
         }
     }
 
-    const startCheckingAuth = () => {
-
-        dispatch( onChecking() );
-
-        onAuthStateChanged( FirebaseAuth, (user) => {
-            
-            if( !user ) return dispatch( onLogout() );
-
-            const { uid, displayName, email, accessToken } = user;
-            localStorage.setItem( 'token', accessToken );
-
-            const userToSave = {
-                uid,
-                name: displayName
-            }
-
-            dispatch( onLogin( userToSave ) );
-
-        })
-
-    }
-
     const startLogout = async () => {
         localStorage.clear();
 
         dispatch( onLogout() );
 
     }
-    
-    
     
     return {
         //Objetos y Propiedades
@@ -97,7 +70,6 @@ export const useAuthStrore = () => {
 
         //Funciones y Metodos
         startLoginWithEmailPassword,
-        startCheckingAuth,
         startCheckAuthToken,
         startLogout
     }
