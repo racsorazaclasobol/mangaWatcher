@@ -30,7 +30,7 @@ export const HeaderManagers = ({ titulo = '' }) => {
                 </IconButton>
             </Grid>
 
-            <Grid item xs={ 12 } mb={ 5 }>
+            <Grid item xs={ 12 } mb={ 2 }>
                 <Divider />
             </Grid>
             
