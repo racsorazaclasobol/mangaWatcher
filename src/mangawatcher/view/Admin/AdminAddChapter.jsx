@@ -31,10 +31,12 @@ export const AdminAddChapter = () => {
 			isCreating, 
 			isLoading, 
 			listMangaTitles, 
-			message, 
+			message,
+			errorMessage,
 
 			//Metodos y funciones
-			startClearStore, 
+			startClearStore,
+			startReportarError,
 			startObtenerTitulosMangas,
 			startStoreNuevoCapitulo, 
 			startSaveChapter, 
@@ -99,6 +101,12 @@ export const AdminAddChapter = () => {
 		let files = [];
 
 		for ( const file of targetFiles ){
+
+			if( file.type != 'image/webp' ) {
+				startReportarError(false, 'Formato inválido', 'El formato debe ser .webp', 'warning');
+				break;
+			}
+			
 			const result = previewImages( file );
 			files.push( result );
 		}
@@ -153,10 +161,23 @@ export const AdminAddChapter = () => {
 
 	useEffect( () => {
 		if( message !== '' ){
-			Swal.fire( 'Guardado Correctamente', message, 'success' )
-			onClearForm();
+			Swal.fire( 'Guardado Correctamente', message, 'success' );
+			
+			setTimeout(() => {
+				onClearForm();
+			}, 1000);
 		}
 	},[ message ] )
+
+	useEffect( () => {
+
+		if ( !errorMessage ) return;
+		const { ok, title, msg } = errorMessage;
+
+		Swal.fire( title, msg, 'warning' );
+
+			
+	},[ errorMessage ] )
 
 	useEffect(() => {
 		
@@ -185,7 +206,7 @@ export const AdminAddChapter = () => {
 	return (
 		<>
 				{
-					( isCreating || isLoading )
+					( isLoading )
 					? (<SimboloCargando />)
 					: (<></>)
 				}
