@@ -160,12 +160,15 @@ export const AdminAddChapter = () => {
 	}, [formState])
 
 	useEffect( () => {
+		console.log( message )
 		if( message !== '' ){
-			Swal.fire( 'Guardado Correctamente', message, 'success' );
-			
-			setTimeout(() => {
+	
+			Swal.fire( 'Guardado Correctamente', message, 'success' )
+			.then( result => {
+				if( !result.isConfirmed ) return;
 				onClearForm();
-			}, 1000);
+			});
+	
 		}
 	},[ message ] )
 
