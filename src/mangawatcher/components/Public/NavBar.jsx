@@ -1,8 +1,9 @@
-import { Box, Grid } from '@mui/material'
+import { Box, Grid, Typography } from '@mui/material'
 import { useUIStore, useMangaStore } from '../../hooks';
 
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
 import NightlightOutlinedIcon from '@mui/icons-material/NightlightOutlined';
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import SwipeIcon from '@mui/icons-material/Swipe';
 import SwipeVerticalIcon from '@mui/icons-material/SwipeVertical';
 
@@ -37,16 +38,15 @@ export const NavBar = () => {
 					{
 						( styleMode === 'dark' )
 						? ( <Box>
-								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1670807848/MyManga/Logo/Logo_Peque%C3%B1o_yrfjbi.png" className='d-block d-sm-none'/> 
-								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1670807848/MyManga/Logo/Logo_Peque%C3%B1o_yrfjbi.png" className='d-none d-sm-block'/> 
-								
+								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1675984511/MyManga/Logo/Logo_3.1_cpbw0j.webp' className='d-block d-sm-none'/> 
+								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1675984511/MyManga/Logo/Logo_3.1_cpbw0j.webp' className='d-none d-sm-block'/> 								
 							</Box>
 						  )
 						
 						: ( 
 							<Box >
-								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1670807816/MyManga/Logo/White_Mode_Logo_Peque%C3%B1o_jwwxou.png' className='d-block d-sm-none'/> 
-								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1670807816/MyManga/Logo/White_Mode_Logo_Peque%C3%B1o_jwwxou.png' className='d-none d-sm-block'/> 
+								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1675984523/MyManga/Logo/Logo_3.0_zx3lne.webp" className='d-block d-sm-none'/> 
+								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1675984523/MyManga/Logo/Logo_3.0_zx3lne.webp" className='d-none d-sm-block'/> 
 							</Box>
 						  )
 					}
