@@ -1,15 +1,18 @@
 import { IconButton, Grid, Typography, Divider } from "@mui/material";
 import { LogoutOutlined } from "@mui/icons-material";
 
-import { useAuthStrore } from "../../hooks";
+import { useAuthStrore, useUIStore } from "../../hooks";
 
 
 export const HeaderManagers = ({ titulo = '' }) => {
 
     const { user, startLogout } = useAuthStrore();
+    const { navigate } = useUIStore();
 
     const onLogout = () => {
 		startLogout();
+
+        navigate( '/admin', { replace: true } );
 	}
 
     return (
