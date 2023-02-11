@@ -7,6 +7,7 @@ import { useForm } from "../../../hooks"
 import { useAdminStore, useAuthStrore, useUIStore } from "../../hooks";
 import { CardImagePreview, DemoUserButton, HeaderManagers } from "../../components";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 let initialForm = {
     uid: '',
@@ -21,6 +22,7 @@ export const AdminEditManga = () => {
         //Parametros y Objetos
         listMangaTitles,
         infoManga,
+        errorMessage,
         
         //Metodos y funciones
         startUpdateManga, 
@@ -86,6 +88,16 @@ export const AdminEditManga = () => {
         setMangaSelected( target.value );
 
     }
+
+    useEffect( () => {
+
+        if( !errorMessage ) return;
+        
+        const { title, msg, type } = errorMessage;
+
+        Swal.fire( title, msg, type )
+
+    }, [ errorMessage ] );
 
     useEffect(() => {
         
