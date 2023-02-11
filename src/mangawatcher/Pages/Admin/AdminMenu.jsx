@@ -2,15 +2,18 @@ import { Link } from "react-router-dom"
 import { Grid, Typography, Box, Card, CardMedia, CardContent, Divider } from "@mui/material"
 
 import { MangaLayout } from "../../layout/MangaLayout"
+import { HeaderManagers } from "../../components"
 
 export const AdminMenu = () => {
 
     return (
         <>
             <MangaLayout>
-                <Grid container minHeight={'calc(100vh - 230px)'} mt={ 5 }>
-                    
-                    <Grid container spacing={ 2 } justifyContent='center' mb={ 5 }>
+                <Grid container minHeight={'calc(100vh - 230px)'} mt={ 2 }>
+
+                    <Grid container spacing={ 2 } justifyContent='center' mb={ 15 }>
+
+                        <HeaderManagers />
 
                         <Grid item xs={ 11 } sm={ 8 } md={ 5 } xl={ 4 }>
                             <Card sx={{ display: 'flex', height: '265px' }}>

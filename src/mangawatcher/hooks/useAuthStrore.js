@@ -43,11 +43,12 @@ export const useAuthStrore = () => {
         try {
 
             const { data } = await mangaApi.get( '/auth/renew' );
+            const { usuario } = data;
 
             localStorage.setItem( 'token', data.token );
             localStorage.setItem( 'token-init-date', new Date().getDate() );
 
-            dispatch( onLogin( { name: data.nombre, uid: data.uid } ) );
+            dispatch( onLogin( { name: usuario.nombre, uid: usuario.uid } ) );
             
         } catch (error) {
             localStorage.clear();
