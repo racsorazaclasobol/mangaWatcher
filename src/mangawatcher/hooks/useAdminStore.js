@@ -226,7 +226,10 @@ export const useAdminStore = () => {
             dispatch( onCreatedDone('Manga agregado correctamente.') );
             
         } catch (error) {
-            console.log(error)
+            console.log(error);
+            const { data } = error.response;
+
+            dispatch( onSetErrorMessage({ ok: false, title: 'Ha ocurrido un error', msg: data.msg, type: 'error' }) );
         }        
     }
 
