@@ -38,15 +38,15 @@ export const NavBar = () => {
 					{
 						( styleMode === 'dark' )
 						? ( <Box>
-								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1675984511/MyManga/Logo/Logo_3.1_cpbw0j.webp' className='d-block d-sm-none'/> 
-								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1675984511/MyManga/Logo/Logo_3.1_cpbw0j.webp' className='d-none d-sm-block'/> 								
+								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1676168829/MyManga/Logo/Logo_3.1_xegt58.webp' className='d-block d-sm-none'/> 
+								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1676168829/MyManga/Logo/Logo_3.1_xegt58.webp' className='d-none d-sm-block'/> 								
 							</Box>
 						  )
 						
 						: ( 
 							<Box >
-								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1675984523/MyManga/Logo/Logo_3.0_zx3lne.webp" className='d-block d-sm-none'/> 
-								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1675984523/MyManga/Logo/Logo_3.0_zx3lne.webp" className='d-none d-sm-block'/> 
+								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1676168828/MyManga/Logo/Logo_3.0_oyk9ie.webp" className='d-block d-sm-none'/> 
+								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1676168828/MyManga/Logo/Logo_3.0_oyk9ie.webp" className='d-none d-sm-block'/> 
 							</Box>
 						  )
 					}
