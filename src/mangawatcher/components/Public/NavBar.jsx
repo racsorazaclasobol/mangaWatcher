@@ -6,6 +6,7 @@ import NightlightOutlinedIcon from '@mui/icons-material/NightlightOutlined';
 import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import SwipeIcon from '@mui/icons-material/Swipe';
 import SwipeVerticalIcon from '@mui/icons-material/SwipeVertical';
+import { Link } from 'react-router-dom';
 
 export const NavBar = () => {
 
@@ -58,7 +59,9 @@ export const NavBar = () => {
 						( !activeManga )
 						? 	( 
 								<Tooltip title="Donar">
-									<VolunteerActivismIcon sx={{ fontSize: '33px', }} className='botonesNavbar'/>
+									<Link to="/donate">
+										<VolunteerActivismIcon sx={{ fontSize: '33px', }} className='botonesNavbar'/>
+									</Link>
 								</Tooltip>
 						 	)	
 						: ( <></> )

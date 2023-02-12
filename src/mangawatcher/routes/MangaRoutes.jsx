@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom"
-import { ChapterManager, MangaManager, MangaPage } from "../Pages"
+import { ChapterManager, DonatePage, MangaManager, MangaPage } from "../Pages"
 
 export const MangaRoutes = () => {
 	return (
@@ -8,6 +8,7 @@ export const MangaRoutes = () => {
 			<Routes>
 
 				<Route path="/home" element={ <MangaPage /> } />
+				<Route path="/donate" element={ <DonatePage /> } />
 				<Route path="reading/:id" element={ <MangaPage /> } />
 				<Route path="/admin/managerManga/:action" element={ <MangaManager /> } />
 				<Route path="/admin/managerChapter/:action" element={ <ChapterManager /> } />
