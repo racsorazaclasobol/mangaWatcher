@@ -4,13 +4,12 @@ import { grey } from "@mui/material/colors"
 export const Footer = () => {
 	return (
 		<>
-			<Grid container mt={ 0 } justifyContent='center' height={100} sx={{ backgroundColor:'black' }} >
-				<Grid item xs={ 12 } sm={ 10 }  alignItems='center' alignContent='center' container >
-
-					<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_150/v1671651562/MyManga/Logo/Logo_ByN_zyzvr6.png" height="60" />
-					<Divider orientation="vertical" sx={{ backgroundColor:`${ grey[700] }`, height: '60%', marginLeft:'20px' }} flexItem />
+			<Grid container direction='column' maxHeight={150} pt={ 1 } pb={ 1 } sx={{ backgroundColor:'black' }} >
+				<Grid item xs={ 3 } textAlign='center'>
+					<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/v1676220153/MyManga/Logo/Logo_Blanco_y_negro_hszouz.webp" height="60" />
+				</Grid>
+				<Grid item xs={ 9 } textAlign='center' >
 					<Typography color={ grey[200] } ml={ 3 } mt={ 2 }>Entretenimiento para amantes del Manga.</Typography>
-
 				</Grid>
 			</Grid>		
 		</>
