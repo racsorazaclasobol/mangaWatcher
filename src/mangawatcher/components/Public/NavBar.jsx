@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material'
+import { Box, Grid, Tooltip, Typography } from '@mui/material'
 import { useUIStore, useMangaStore } from '../../hooks';
 
 import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
@@ -55,17 +55,33 @@ export const NavBar = () => {
 				<Grid item pt={ 2 } pr={ 2 }>
 
 					{
+						( !activeManga )
+						? 	( 
+								<Tooltip title="Donar">
+									<VolunteerActivismIcon sx={{ fontSize: '33px', }} className='botonesNavbar'/>
+								</Tooltip>
+						 	)	
+						: ( <></> )
+					}
+					
+					<Tooltip title="Luz">
+					{
 						( styleMode === 'dark' )
 						? ( <NightlightOutlinedIcon sx={{ fontSize: '33px', }} className='botonesNavbar' onClick={ onChangeStyleMode } /> )
 						: ( <LightModeOutlinedIcon sx={{ fontSize: '33px',  }} className='botonesNavbar' onClick={ onChangeStyleMode } /> )
 					} 
+					</Tooltip>
 
 					{
 						( activeManga )
 						? 	(
-								( localVisualizador === '0' )
-								? ( <SwipeIcon className='botonesNavbar' sx={{ fontSize: '33px' }} onClick={ () => onSetVisualizador( 1 ) } /> )
-								: ( <SwipeVerticalIcon className='botonesNavbar' sx={{ fontSize: '33px' }} onClick={ () => onSetVisualizador( 0 ) } />)
+								<Tooltip title="Visualización">
+									{
+										( localVisualizador === '0' )
+										? ( <SwipeIcon className='botonesNavbar' sx={{ fontSize: '33px' }} onClick={ () => onSetVisualizador( 1 ) } /> )
+										: ( <SwipeVerticalIcon className='botonesNavbar' sx={{ fontSize: '33px' }} onClick={ () => onSetVisualizador( 0 ) } />)
+									}
+								</Tooltip>
 							)
 						: ( <> </> )
 					}
