@@ -34,6 +34,9 @@ export const InfoCapitulo = ({ pagina }) => {
 			case 'E':
 				setTitulo('Extras');
 				break;
+			case 'F':
+				setTitulo('Fin');
+				break;
 		
 			default:
 				setTitulo('');

@@ -82,6 +82,10 @@ export const useMangaStore = () => {
 
             const { data: chapter } = await mangaApi.get( `/chapters/byid/${ chapterID }` );
 
+            //Agregamos última pagina fin
+            chapter.paginas.push( { pagina: 1, tipo: 'F', url: 'https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_800/v1676218829/MyManga/assets/Fin_drbwxg.webp' } )
+            console.log(chapter)
+
             if( !chapter ) return abortarMision();
 
             const { data: listChapters } = await mangaApi.get( `/chapters/list/${ chapter.manga._id }` );
