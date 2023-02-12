@@ -21,7 +21,7 @@ export const TitleMangas = () => {
             
                 <Grid item  xs={ 10 } p={ 1 } minHeight='50px' className="box-shadow" sx={{ paddingLeft: { md: '150px', sm: '75px', xs: '0px', lg: '250px',  } , borderTop: '1px solid', borderColor: `${ styleMode }.secondary` , borderBottomLeftRadius:'10px', backgroundColor: `${ styleMode }.primary` }} >
                     
-                    <Typography variant='h6' mt={ 1 } sx={{ color: `colors.gray.claro` }} >
+                    <Typography variant='h6' mt={ 1 } sx={{ color: `colors.gray.claro`, fontWeight: 'bold' }} >
                         { `${ manga.nombre }  ${ capitulo } Español - ${ titulo } `}			
                     </Typography>
 
