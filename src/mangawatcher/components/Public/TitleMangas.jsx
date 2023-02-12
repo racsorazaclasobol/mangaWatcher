@@ -28,7 +28,7 @@ export const TitleMangas = () => {
                 </Grid>
 
                 <Grid item xs={ 2 } minHeight='50px' className="box-shadow" sx={{ borderTop: '1px solid', borderColor: `${ styleMode }.secondary`, borderBottomRightRadius:'10px', display:'flex' }} bgcolor={ `${ styleMode }.primary` } alignItems='center' justifyContent='center' >
-                    <Tooltip title='Capítulo'>
+                    <Tooltip title='Capítulos'>
                         <IconButton onClick={ onOpenModal }>
                             <PinIcon sx={{ fontSize: '33px' }} className='botonesNavbar' />
                         </IconButton>
