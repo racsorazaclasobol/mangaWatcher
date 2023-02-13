@@ -55,6 +55,10 @@ export const useMangaStore = () => {
             dispatch( onResetCounter());
             
             const { data: chapter }      = await mangaApi.get( `/chapters/last/${ mangaId }` );
+             
+            //Agregamos última pagina fin
+            chapter.paginas.push( { pagina: 1, tipo: 'F', url: 'https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_800/v1676218829/MyManga/assets/Fin_drbwxg.webp' } )
+
             const { data: listChapters } = await mangaApi.get( `/chapters/list/${ mangaId }` );
 
             dispatch( setActiveManga( chapter ) );
