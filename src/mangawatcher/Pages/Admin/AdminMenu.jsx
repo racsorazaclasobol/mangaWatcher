@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { Grid, Typography, Box, Card, CardMedia, CardContent, Divider } from "@mui/material"
+import { Grid, Typography, Box, Card, CardMedia, CardContent, Divider, Badge } from "@mui/material"
 
 import { MangaLayout } from "../../layout/MangaLayout"
 import { HeaderManagers } from "../../components"
@@ -9,12 +9,16 @@ export const AdminMenu = () => {
     return (
         <>
             <MangaLayout>
+                
+                <Box mt={ 2 } >
+                    <HeaderManagers />
+                </Box>
+                
                 <Grid container minHeight={'calc(100vh - 230px)'} mt={ 2 }>
 
                     <Grid container spacing={ 2 } justifyContent='center' mb={ 15 }>
 
-                        <HeaderManagers />
-
+                        
                         <Grid item xs={ 11 } sm={ 8 } md={ 5 } xl={ 4 }>
                             <Card sx={{ display: 'flex', height: '265px' }}>
                                 <CardMedia
@@ -66,9 +70,12 @@ export const AdminMenu = () => {
                                         </Link>
 
                                         <Link to="/admin/managerChapter/edit" style={{ textDecoration: 'none' }} >
-                                            <Typography variant="h6" color="text.secondary" component="div">
-                                                Editar Chapter
-                                            </Typography>
+                                            <Badge badgeContent={ 'En desarrollo..' } color="warning">
+                                                <Typography variant="h6" color="text.secondary" component="div">
+                                                    Editar Chapter
+                                                </Typography>
+                                            </Badge>
+
                                         </Link>
                                         
                                     </CardContent>
