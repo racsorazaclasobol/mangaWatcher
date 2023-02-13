@@ -96,8 +96,7 @@ export const useAdminStore = () => {
             dispatch( onCreatedDone('Capítulo agregado correctamente.') );
             
         } catch (error) {
-            const { response }  = error;
-            const { data }      = response;
+            const { data } = error.response;
 
             onSetErrorMessage({ ok: false, title: 'Ha ocurrido un error', msg: data.msgError, type: 'error' })
         }        
@@ -161,12 +160,14 @@ export const useAdminStore = () => {
     //TODO: Validaciones
     const startSaveManga = async ( manga ) => {
 
-        dispatch( onCreating( true ) );
+        dispatch( onLoading( true ) );
         
         try {
+
+            if( !manga ) return dispatch( onSetErrorMessage({ ok: false, title: 'Error al publicar el manga', msg: 'Hay un problema con su publicación', type: 'error' }) )
         
             const { portada, ...mangaToSave } = manga;
-            
+
             let formData = new FormData();
             formData.append( 'archivo', portada );                
             
@@ -177,8 +178,9 @@ export const useAdminStore = () => {
             dispatch( onCreatedDone('Manga agregado correctamente.') );
             
         } catch (error) {
-            console.log(error)
-            
+            const { data } = error.response;
+            console.log( data.msg )
+            dispatch( onSetErrorMessage({ ok: false, title: "Ha ocurrido un error", msg: data.msg, type: 'error' }) );
         }        
     }
 

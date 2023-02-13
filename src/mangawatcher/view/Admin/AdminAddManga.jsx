@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Button, Divider, Grid, IconButton, TextField, Typography } from "@mui/material"
 import { LogoutOutlined } from "@mui/icons-material";
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
@@ -7,6 +7,7 @@ import { useForm } from "../../../hooks"
 import { useAdminStore, useAuthStrore, useUIStore } from "../../hooks";
 import { CardImagePreview, DemoUserButton, HeaderManagers } from "../../components";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const initialForm = {
     nombre: '',
@@ -18,7 +19,7 @@ export const AdminAddManga = () => {
 
     const portadaRef = useRef();
 	const { styleMode } = useUIStore();
-	const { startSaveManga } = useAdminStore();
+	const { errorMessage, startClearStore, startSaveManga } = useAdminStore();
 	const { user } = useAuthStrore();
     const { nombre, autor, formState, onInputChange, onInputCustomChange } = useForm( initialForm );
     const [previewPortada, setPreviewPortada] = useState();
@@ -56,6 +57,21 @@ export const AdminAddManga = () => {
 		
 	}    
 
+
+	useEffect( () => {
+
+		if ( !errorMessage ) return;
+		const { ok, title, msg, type } = errorMessage;
+
+		Swal.fire( title, msg, type )
+		.then( resp => {
+			if( resp.isConfirmed || resp.isDismissed ){
+				startClearStore();
+			}
+		});
+
+			
+	},[ errorMessage ] )
 
     return (    
         
