@@ -18,19 +18,21 @@ export const HeaderManagers = ({ titulo = '' }) => {
     return (
         <>
         
-            <Grid item xs={ 10 }  >
-                <Typography variant="h4">
-                    { titulo }
-                </Typography>
-            </Grid>
+            <Grid container>
+                <Grid item xs={ 10 }  >
+                    <Typography variant="h4" >
+                        { titulo }
+                    </Typography>
+                </Grid>
 
-            <Grid item xs={ 2 } display='flex' >
-                <Typography variant="overline" mt={ 1.3 }>
-                    { user.name }
-                </Typography>
-                <IconButton color="error" onClick={ onLogout } >
-                    <LogoutOutlined sx={{ fontSize:'30px' }}/> 
-                </IconButton>
+                <Grid item xs={ 2 } display='flex' >
+                    <Typography variant="overline" mt={ 1.3 } >
+                        { user.name }
+                    </Typography>
+                    <IconButton color="error" onClick={ onLogout } >
+                        <LogoutOutlined sx={{ fontSize:'30px' }}/> 
+                    </IconButton>
+                </Grid>
             </Grid>
 
             <Grid item xs={ 12 } mb={ 2 }>
