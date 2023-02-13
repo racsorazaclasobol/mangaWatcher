@@ -14,7 +14,7 @@ export const MangaTitleItem = () => {
         <>
             {
                 mangas.map( ( { uid, nombre, portada, autor, capitulo, titulo }, index, array ) => (
-                    <Grid container key={ index } item xs={ 12 } sm={ 10 } md={ 6 } lg={ 4 } xl={ 3.5 } onClick={ () => onOpenManga( uid, nombre ) } className="pointer" >
+                    <Grid container key={ index } item xs={ 12 } sm={ 10 } md={ 6 } lg={ 4 } xl={ 3.5 } onClick={ () => onOpenManga( uid, nombre ) } className="pointer animate__animated animate__fadeIn" >
                         <Card sx={{ display: '', height: '200px', width:'100%',  backgroundColor: `${ styleMode }.bgColorCards` }}>
                             <CardMedia
                                 component="img"
