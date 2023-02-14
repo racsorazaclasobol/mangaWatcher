@@ -89,15 +89,19 @@ export const AdminEditManga = () => {
 
     }
 
-    useEffect( () => {
+	useEffect( () => {
 
-        if( !errorMessage ) return;
-        
-        const { title, msg, type } = errorMessage;
+		if ( !errorMessage ) return;
+		const { ok, title, msg, type } = errorMessage;
 
-        Swal.fire( title, msg, type )
-
-    }, [ errorMessage ] );
+		Swal.fire( title, msg, type )
+		.then( resp => {
+			if( resp.isConfirmed || resp.isDismissed ){
+				startClearStore();
+			}
+		});
+			
+	},[ errorMessage ] )
 
     useEffect(() => {
         
