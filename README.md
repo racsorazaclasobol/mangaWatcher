@@ -18,15 +18,17 @@ Tecnologías utilizadas:
 * Firebase Firestore. (Reemplazado por MongoDB en el Backend)
 
 * Vercel ( Frontend )
-* Heroku ( Backend )
+* Railway ( Backend, antes Heroku pero dejo de ser gratuito jaja )
 
 ```
 Credenciales Cuenta Demo
 --------------------------------------------------------
 
-Admin page: https://mymanga.vercel.app/
+Admin Page: https://mimanga.org/#/admin
 
-Correo: demo@gmail.com
-Password: 123456789
+Correo: test@gmail.com
+Password: 123456
+
+No tendrá los permisos para guardar o editar nada, pero tendrá acceso a ver el funcionamiento del panel de administración
 
 ```
