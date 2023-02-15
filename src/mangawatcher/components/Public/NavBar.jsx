@@ -39,14 +39,14 @@ export const NavBar = () => {
 					{
 						( styleMode === 'dark' )
 						? ( <Box>
-								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1676168829/MyManga/Logo/Logo_3.1_xegt58.webp' className='d-block d-sm-none'/> 
+								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_70/v1676168829/MyManga/Logo/Logo_3.1_xegt58.webp' className='d-block d-sm-none'/> 
 								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1676168829/MyManga/Logo/Logo_3.1_xegt58.webp' className='d-none d-sm-block'/> 								
 							</Box>
 						  )
 						
 						: ( 
 							<Box >
-								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_80/v1676168828/MyManga/Logo/Logo_3.0_oyk9ie.webp" className='d-block d-sm-none'/> 
+								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_70/v1676168828/MyManga/Logo/Logo_3.0_oyk9ie.webp" className='d-block d-sm-none'/> 
 								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1676168828/MyManga/Logo/Logo_3.0_oyk9ie.webp" className='d-none d-sm-block'/> 
 							</Box>
 						  )
@@ -60,7 +60,7 @@ export const NavBar = () => {
 						? 	( 
 								<Tooltip title="Donar">
 									<Link to="/donate">
-										<VolunteerActivismIcon sx={{ fontSize: '33px', }} className='botonesNavbar'/>
+										<VolunteerActivismIcon sx={{ fontSize: { xs: '27px', sm: '33px' } }} className='botonesNavbar'/>
 									</Link>
 								</Tooltip>
 						 	)	
@@ -70,8 +70,8 @@ export const NavBar = () => {
 					<Tooltip title="Luz">
 					{
 						( styleMode === 'dark' )
-						? ( <NightlightOutlinedIcon sx={{ fontSize: '33px', }} className='botonesNavbar' onClick={ onChangeStyleMode } /> )
-						: ( <LightModeOutlinedIcon sx={{ fontSize: '33px',  }} className='botonesNavbar' onClick={ onChangeStyleMode } /> )
+						? ( <NightlightOutlinedIcon sx={{ fontSize: { xs: '27px', sm: '33px' } }} className='botonesNavbar' onClick={ onChangeStyleMode } /> )
+						: ( <LightModeOutlinedIcon sx={{ fontSize: { xs: '27px', sm: '33px' }  }} className='botonesNavbar' onClick={ onChangeStyleMode } /> )
 					} 
 					</Tooltip>
 
@@ -81,8 +81,8 @@ export const NavBar = () => {
 								<Tooltip title="Visualización">
 									{
 										( localVisualizador === '0' )
-										? ( <SwipeIcon className='botonesNavbar' sx={{ fontSize: '33px' }} onClick={ () => onSetVisualizador( 1 ) } /> )
-										: ( <SwipeVerticalIcon className='botonesNavbar' sx={{ fontSize: '33px' }} onClick={ () => onSetVisualizador( 0 ) } />)
+										? ( <SwipeIcon className='botonesNavbar' sx={{ fontSize: { xs: '27px', sm: '33px' } }} onClick={ () => onSetVisualizador( 1 ) } /> )
+										: ( <SwipeVerticalIcon className='botonesNavbar' sx={{ fontSize: { xs: '27px', sm: '33px' } }} onClick={ () => onSetVisualizador( 0 ) } />)
 									}
 								</Tooltip>
 							)
