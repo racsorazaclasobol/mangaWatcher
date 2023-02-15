@@ -29,11 +29,11 @@ export const MangaPage = () => {
 		<>
 			<MangaLayout>
 
-				{
+				{/* {
 					( isLoading )
 					? (<SimboloCargando />)
 					: (<></>)
-				}
+				} */}
 
 				<Grid container pb={ 5 }>
 					{
