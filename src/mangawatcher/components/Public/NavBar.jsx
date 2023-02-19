@@ -44,7 +44,7 @@ export const NavBar = () => {
 								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_70/v1676168829/MyManga/Logo/Logo_3.1_xegt58.webp' className='d-block d-sm-none'/> 
 								<img src='https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1676168829/MyManga/Logo/Logo_3.1_xegt58.webp' className='d-none d-sm-block'/> 								
 							</Box>
-							<Typography> QA </Typography>
+							<Typography> QA - e </Typography>
 							</>
 						  )
 						
@@ -53,7 +53,7 @@ export const NavBar = () => {
 								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_70/v1676168828/MyManga/Logo/Logo_3.0_oyk9ie.webp" className='d-block d-sm-none'/> 
 								<img src="https://res.cloudinary.com/dmuswnvaf/image/upload/c_scale,h_100/v1676168828/MyManga/Logo/Logo_3.0_oyk9ie.webp" className='d-none d-sm-block'/> 
 							</Box>
-							<Typography> QA </Typography>
+							<Typography> QA - e </Typography>
 							</>
 						  )
 					}
