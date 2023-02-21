@@ -7,6 +7,10 @@ const mangaApi = axios.create({
     baseURL: VITE_API_URL
 });
 
+console.log("******************VITE_API_URL**********************")
+console.log( VITE_API_URL )
+console.log("*****************/VITE_API_URL**********************")
+
 mangaApi.interceptors.request.use( config => {
 
     config.headers = {
