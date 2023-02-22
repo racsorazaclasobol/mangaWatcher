@@ -50,6 +50,7 @@ export const adminSlice = createSlice({
             state.isCreating = false;
             state.isLoading = false;
             state.message = '';
+            state.errorMessage = undefined;
             state.newChapter = null;
             state.newManga = null;
         },

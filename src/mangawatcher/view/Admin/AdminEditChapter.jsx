@@ -7,6 +7,7 @@ import { useForm } from "../../../hooks";
 import { ChapterImagePreview, HeaderManagers, SimboloCargando } from "../../components"
 import { useAdminStore, useUIStore } from "../../hooks"
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 let initialFilter = { manga: '', chapter: '' };
 
@@ -33,12 +34,16 @@ export const AdminEditChapter = () => {
         listMangaTitles,
         listChaptersTitles,
         infoManga,
+        errorMessage,
+        formatImages,
 
         // Funciones
         startObtenerTitulosMangas,
         startObtenerListaCapitulos,
         startObtenerChapterPorUID,
         startUpdateChapter,
+        startReportarError,
+        startClearStore,
 
     } = useAdminStore();
 
@@ -67,6 +72,8 @@ export const AdminEditChapter = () => {
     const onImageInputChange = ( { target }, tipo ) => {
 
         if( target.files === 0 ) return;
+
+		if ( !validateFormat( target.files[0].type ) ) return; 
         
         const filePreview = extractCardFile( target.files );
 
@@ -132,6 +139,29 @@ export const AdminEditChapter = () => {
 
 
     }
+
+    const validateFormat = ( fileFormat ) => {
+		if( formatImages.includes( fileFormat ) ) return true;
+
+		startReportarError(false, 'Formato inválido', 'Los formatos permitidos son: webp, png, jfif, jpg, jpeg', 'warning');
+		return false;
+
+	}
+
+    useEffect( () => {
+
+		if ( !errorMessage ) return;
+		const { ok, title, msg, type } = errorMessage;
+
+		Swal.fire( title, msg, type )
+		.then( resp => {
+			if( resp.isConfirmed || resp.isDismissed ){
+				startClearStore();
+			}
+		});
+
+			
+	},[ errorMessage ] )
 
     useEffect( () => {
 
@@ -285,7 +315,7 @@ export const AdminEditChapter = () => {
                         <Grid item xs={ 12 } md={ 3 }  >
                             <input
                                 type="file"
-                                accept=".webp" 
+                                accept={ formatImages } 
                                 multiple
                                 ref={ thanksInputRef }
                                 onChange={ (e) => onImageInputChange(e, 'A' ) }
@@ -327,7 +357,7 @@ export const AdminEditChapter = () => {
                         <Grid item xs={ 12 } md={ 3 } >
                             <input
                                 type="file"
-                                accept=".webp" 
+                                accept={ formatImages } 
                                 multiple
                                 ref={ coversInputRef }
                                 onChange={ (e) => onImageInputChange(e, 'P' ) }
@@ -369,7 +399,7 @@ export const AdminEditChapter = () => {
                         <Grid item xs={ 12 } md={ 3 }>
                             <input
                                 type="file"
-                                accept=".webp" 
+                                accept={ formatImages } 
                                 multiple
                                 ref={ chapterInputRef }
                                 onChange={ (e) => onImageInputChange(e, 'C' ) }
@@ -411,7 +441,7 @@ export const AdminEditChapter = () => {
                         <Grid item xs={ 12 } md={ 3 }>
                             <input
                                 type="file"
-                                accept=".webp" 
+                                accept={ formatImages }
                                 multiple
                                 ref={ extrasInputRef }
                                 onChange={ (e) => onImageInputChange(e, 'E' ) }

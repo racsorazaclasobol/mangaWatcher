@@ -6,11 +6,13 @@ import { onCreating, onSetNewChapter, onCreatedDone, onClearStore, onLoading, on
 
 export const useAdminStore = () => {
 
+    
     const dispatch = useDispatch();
-
+    
     const { listMangaTitles, listChaptersTitles, newChapter, message, errorMessage, isCreating, isLoading, infoManga } = useSelector( state => state.admin );
     const { mangas: mangaList } = useSelector( state => state.manga );
-
+    
+	const formatImages = ['image/webp', 'image/png', 'image/jfif', 'image/jpg', 'image/jpeg'];
 
     const startClearStore = () => {
         dispatch ( onClearStore() );
@@ -18,7 +20,7 @@ export const useAdminStore = () => {
 
     const startReportarError = ( ok, title, msg, type ) => {
 
-        dispatch( onSetErrorMessage( { ok, title, msg } ) );
+        dispatch( onSetErrorMessage( { ok, title, msg, type } ) );
 
     }
 
@@ -248,6 +250,7 @@ export const useAdminStore = () => {
         mangaList,
         message,
         errorMessage,
+        formatImages,
 
         //Metodos y Funciones
         startClearStore,

@@ -23,11 +23,15 @@ export const AdminEditManga = () => {
         listMangaTitles,
         infoManga,
         errorMessage,
+        formatImages,
         
         //Metodos y funciones
         startUpdateManga, 
         startObtenerTitulosMangas,
         startGetMangaInfo,
+        startReportarError,
+        startClearStore,
+
     } = useAdminStore();
         
     const { 
@@ -59,6 +63,7 @@ export const AdminEditManga = () => {
     const onPortadaChange = ( { target } ) => {
         
         if ( !target.files[0] ) return;
+		if ( !validateFormat( target.files[0].type ) ) return; 
 
         const fileUrl = previewImages( target.files[0] );
 
@@ -88,6 +93,14 @@ export const AdminEditManga = () => {
         setMangaSelected( target.value );
 
     }
+
+    const validateFormat = ( fileFormat ) => {
+		if( formatImages.includes( fileFormat ) ) return true;
+
+		startReportarError(false, 'Formato inválido', 'Los formatos permitidos son: webp, png, jfif, jpg, jpeg', 'warning');
+		return false;
+
+	}
 
 	useEffect( () => {
 
@@ -216,7 +229,7 @@ export const AdminEditManga = () => {
                                     <Grid item xs={ 12 } mt={ 3 }>
                                         <input
                                             type="file"
-                                            accept="image/*.webp" 
+                                            accept={ formatImages }
                                             multiple
                                             ref={ portadaRef }
                                             onChange={ onPortadaChange }

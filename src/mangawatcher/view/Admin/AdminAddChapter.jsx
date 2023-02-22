@@ -21,36 +21,39 @@ const formValidation = {
 	manga:		[ (value) => value.length > 0, 	'El manga es obligatorio.'],
 	capitulo:   [ (value) => value.length > 0 , 'El capítulo es obligatorio.'],
 	titulo:  	[ (value) => value.length > 1,  'El título del capitulo es obligatorio'],
-  }
+}
+
 
 export const AdminAddChapter = () => {
 	
+	
 	const { 
-			//Parametros y Objetos
-			infoManga, 
-			isCreating, 
-			isLoading, 
-			listMangaTitles, 
-			message,
-			errorMessage,
-
-			//Metodos y funciones
-			startClearStore,
-			startReportarError,
-			startObtenerTitulosMangas,
-			startStoreNuevoCapitulo, 
-			startSaveChapter, 
-
-		} = useAdminStore();
-
+		//Parametros y Objetos
+		infoManga, 
+		isCreating, 
+		isLoading, 
+		listMangaTitles, 
+		message,
+		errorMessage,
+		formatImages,
 		
+		//Metodos y funciones
+		startClearStore,
+		startReportarError,
+		startObtenerTitulosMangas,
+		startStoreNuevoCapitulo, 
+		startSaveChapter, 
+		
+	} = useAdminStore();
+
+	
 	const { styleMode } = useUIStore();
 	const { user } = useAuthStrore();
 	
 	const { 
-			formState, manga, capitulo, titulo, isFormValid, mangaValid, capituloValid, tituloValid, 
-			onInputChange, onResetForm, onInputCustomChange 
-
+		formState, manga, capitulo, titulo, isFormValid, mangaValid, capituloValid, tituloValid, 
+		onInputChange, onResetForm, onInputCustomChange 
+		
 		} = useForm(initialForm, formValidation);
 	
 	const [thanksTitlesList, setThanksTitlesList] = useState([]);
@@ -69,7 +72,7 @@ export const AdminAddChapter = () => {
 	const extrasInputRef = useRef();
 
 	const onImageInputChange = ( { target }, tipo ) => {
-
+		
 		if( target.files === 0 ) return;
 		
 		const filePreview = extractCardFile( target.files );
@@ -91,8 +94,6 @@ export const AdminAddChapter = () => {
 				setExtrasTitlesList( filePreview );
 				break;
 		
-			default:
-				break;
 		}
 	}
 
@@ -101,14 +102,11 @@ export const AdminAddChapter = () => {
 		let files = [];
 
 		for ( const file of targetFiles ){
-
-			if( file.type != 'image/webp' ) {
-				startReportarError(false, 'Formato inválido', 'El formato debe ser .webp', 'warning');
-				break;
+			if( validateFormat( file.type ) ) {
+				const result = previewImages( file );
+				files.push( result );
 			}
-			
-			const result = previewImages( file );
-			files.push( result );
+
 		}
 
 		return files;
@@ -155,6 +153,14 @@ export const AdminAddChapter = () => {
 
 	}
 
+	const validateFormat = ( fileFormat ) => {
+		if( formatImages.includes( fileFormat ) ) return true;
+
+		startReportarError(false, 'Formato inválido', 'Los formatos permitidos son: webp, png, jfif, jpg, jpeg', 'warning');
+		return false;
+
+	}
+
 	useEffect(() => {
 		startStoreNuevoCapitulo( formState );
 	}, [formState])
@@ -175,9 +181,14 @@ export const AdminAddChapter = () => {
 	useEffect( () => {
 
 		if ( !errorMessage ) return;
-		const { ok, title, msg } = errorMessage;
+		const { ok, title, msg, type } = errorMessage;
 
-		Swal.fire( title, msg, 'warning' );
+		Swal.fire( title, msg, type )
+		.then( resp => {
+			if( resp.isConfirmed || resp.isDismissed ){
+				startClearStore();
+			}
+		});
 
 			
 	},[ errorMessage ] )
@@ -311,8 +322,8 @@ export const AdminAddChapter = () => {
 								<Grid item xs={ 12 } md={ 3 }  >
 									<input
 										type="file"
-										accept=".webp" 
 										multiple
+										accept={ formatImages } 
 										ref={ thanksInputRef }
 										onChange={ (e) => onImageInputChange(e, 'A' ) }
 										style={{ display:'none' }}
@@ -353,8 +364,8 @@ export const AdminAddChapter = () => {
 								<Grid item xs={ 12 } md={ 3 } >
 									<input
 										type="file"
-										accept=".webp" 
 										multiple
+										accept={ formatImages }
 										ref={ coversInputRef }
 										onChange={ (e) => onImageInputChange(e, 'P' ) }
 										style={{ display:'none' }}
@@ -395,8 +406,8 @@ export const AdminAddChapter = () => {
 								<Grid item xs={ 12 } md={ 3 }>
 									<input
 										type="file"
-										accept=".webp" 
 										multiple
+										accept={ formatImages }
 										ref={ chapterInputRef }
 										onChange={ (e) => onImageInputChange(e, 'C' ) }
 										style={{ display:'none' }}
@@ -436,9 +447,9 @@ export const AdminAddChapter = () => {
 
 								<Grid item xs={ 12 } md={ 3 }>
 									<input
-										type="file"
-										accept=".webp" 
+										type="file" 
 										multiple
+										accept={ formatImages }
 										ref={ extrasInputRef }
 										onChange={ (e) => onImageInputChange(e, 'E' ) }
 										style={{ display:'none' }}

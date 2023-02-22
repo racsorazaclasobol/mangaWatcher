@@ -19,7 +19,7 @@ export const AdminAddManga = () => {
 
     const portadaRef = useRef();
 	const { styleMode } = useUIStore();
-	const { errorMessage, startClearStore, startSaveManga } = useAdminStore();
+	const { errorMessage, formatImages, startClearStore, startSaveManga, startReportarError } = useAdminStore();
 	const { user } = useAuthStrore();
     const { nombre, autor, formState, onInputChange, onInputCustomChange } = useForm( initialForm );
     const [previewPortada, setPreviewPortada] = useState();
@@ -33,6 +33,8 @@ export const AdminAddManga = () => {
     const onPortadaChange = ( { target } ) => {
         
         if ( !target.files[0] ) return;
+
+		if ( !validateFormat( target.files[0].type ) ) return; 
 
         const fileUrl = previewImages( target.files[0] );
 
@@ -55,7 +57,16 @@ export const AdminAddManga = () => {
 		
 		return cardFile;
 		
-	}    
+	}   
+	
+	const validateFormat = ( fileFormat ) => {
+		
+		if( formatImages.includes( fileFormat ) ) return true;
+
+		startReportarError(false, 'Formato inválido', 'Los formatos permitidos son: webp, png, jfif, jpg, jpeg', 'warning');
+		return false;
+
+	}
 
 
 	useEffect( () => {
@@ -119,7 +130,7 @@ export const AdminAddManga = () => {
 						<Grid item xs={ 12 } mt={ 3 }>
 							<input
 								type="file"
-								accept="image/*.webp" 
+								accept={ formatImages } 
 								multiple
 								ref={ portadaRef }
 								onChange={ onPortadaChange }
