@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearActiveManga, onLoading, onLoadMangas, onSetListaCaps, setActiveManga } from "../../store/mymanga/mangaSlice";
 import { onCloseModal, onResetCounter } from "../../store/ui/uiSlice";
 import { useUIStore } from "./useUiStore";
+import { compararDosFechas, parsearFecha, sumarDias } from '../../helpers/manageDates'
 import mangaApi from "../../api/mangaApi";
 
 export const useMangaStore = () => {
@@ -27,7 +28,15 @@ export const useMangaStore = () => {
             for (const manga of data) {
                     
                 const { data } = await mangaApi.get( `/chapters/titleLast/${ manga.uid }` );
-                const { uid, ...tempData } = data;
+                const { uid, fechaPublicacion, ...tempData } = data;
+                
+                console.log(fechaPublicacion)
+                const isFechaConsideradaNueva   = parsearFecha( sumarDias( fechaPublicacion, 3 ), "DD-MM-YYYY" );
+                const fechaActual               = parsearFecha( new Date(), "DD-MM-YYYY" );
+                const isANewChapter             = compararDosFechas( isFechaConsideradaNueva, 'isSameOrAfter', fechaActual );
+                
+                tempData.isNew                  = isANewChapter;
+
                 const tempManga = { ...manga, ...tempData };
 
                 mangas.push( tempManga );

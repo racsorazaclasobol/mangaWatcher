@@ -81,6 +81,7 @@ export const useAdminStore = () => {
             if( files.length <= 4 ) return dispatch( onSetErrorMessage({ ok: false, title: 'Hay un problema con su publicación', msg: 'Debe subir al menos 5 páginas', type: 'warning' }) )
         
             const chapterToSave = { ...newChapter };
+            chapterToSave.fechaPublicacion = new Date();
             
             let formData = new FormData();
             
