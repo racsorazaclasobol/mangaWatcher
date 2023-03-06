@@ -11,7 +11,7 @@ export const MangaLayout = ({ children }) => {
 
         <>
 
-            <Grid container direction='column' sx={{ backgroundColor: `${ styleMode }.secondary` }} >
+            <Grid container  sx={{ backgroundColor: `${ styleMode }.secondary` }} >
 
                 <Grid item xs={12} >
                     <NavBar />
