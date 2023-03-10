@@ -24,19 +24,19 @@ export const useMangaStore = () => {
             const { data } = await mangaApi.get( '/mangas' );
             
             let mangas = [];
-
+            
+            const fechaActual               = parsearFecha( new Date(), "DD-MM-YYYY" );
             for (const manga of data) {
                     
                 const { data } = await mangaApi.get( `/chapters/titleLast/${ manga.uid }` );
                 const { uid, fechaPublicacion, ...tempData } = data;
                 
-                console.log(fechaPublicacion)
                 const isFechaConsideradaNueva   = parsearFecha( sumarDias( fechaPublicacion, 3 ), "DD-MM-YYYY" );
-                const fechaActual               = parsearFecha( new Date(), "DD-MM-YYYY" );
                 const isANewChapter             = compararDosFechas( isFechaConsideradaNueva, 'isSameOrAfter', fechaActual );
+                console.log({ mangaTitle: manga.nombre, FechaPublicacion: isFechaConsideradaNueva, fechaActual, isNew: isANewChapter })
                 
                 tempData.isNew                  = isANewChapter;
-
+    
                 const tempManga = { ...manga, ...tempData };
 
                 mangas.push( tempManga );

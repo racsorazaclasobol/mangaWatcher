@@ -13,7 +13,8 @@ export const parsearFecha = ( fechaEntrada, formatoFecha ) => {
 
     if( !fechaEntrada || !formatoFecha ) return;
     
-    const fechaSalida = moment( fechaEntrada ).format( formatoFecha );
+    // const fechaSalida = moment( fechaEntrada ).format( formatoFecha );
+    const fechaSalida = moment( fechaEntrada );
 
     return fechaSalida;
     
