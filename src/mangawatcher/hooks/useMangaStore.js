@@ -33,7 +33,6 @@ export const useMangaStore = () => {
                 
                 const isFechaConsideradaNueva   = parsearFecha( sumarDias( fechaPublicacion, 3 ), "DD-MM-YYYY" );
                 const isANewChapter             = compararDosFechas( isFechaConsideradaNueva, 'isSameOrAfter', fechaActual );
-                console.log({ mangaTitle: manga.nombre, FechaPublicacion: isFechaConsideradaNueva, fechaActual, isNew: isANewChapter })
                 
                 tempData.isNew                  = isANewChapter;
     
